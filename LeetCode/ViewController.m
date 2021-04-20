@@ -66,6 +66,7 @@
     NSInteger j = right;
     NSInteger key_value = [self countFromArray:list index:i];
     while (i < j) {
+        //1. 从最后向前查找到第一个小于keyValue的数值
         while (i < j) {
             NSInteger j_value = [self countFromArray:list index:j];
             if (j_value >= key_value) {
@@ -80,6 +81,7 @@
         }
         list[i] = list[j];
 
+        //1. 从最前向后查找到第一个大于keyValue的数值
         while (i < j) {
             NSInteger i_value = [self countFromArray:list index:i];
             if (i_value <= key_value) {
