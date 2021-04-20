@@ -16,6 +16,7 @@
 		00F84FC9262EB7F500CF735D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F84FC8262EB7F500CF735D /* main.m */; };
 		00F84FD3262EB7F500CF735D /* LeetCodeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F84FD2262EB7F500CF735D /* LeetCodeTests.m */; };
 		00F84FDE262EB7F500CF735D /* LeetCodeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F84FDD262EB7F500CF735D /* LeetCodeUITests.m */; };
+		00F84FF3262EBBBD00CF735D /* FCLinkedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F84FF2262EBBBD00CF735D /* FCLinkedModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,8 @@
 		00F84FD9262EB7F500CF735D /* LeetCodeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LeetCodeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00F84FDD262EB7F500CF735D /* LeetCodeUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LeetCodeUITests.m; sourceTree = "<group>"; };
 		00F84FDF262EB7F500CF735D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		00F84FF1262EBBBD00CF735D /* FCLinkedModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FCLinkedModel.h; sourceTree = "<group>"; };
+		00F84FF2262EBBBD00CF735D /* FCLinkedModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FCLinkedModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +113,8 @@
 				00F84FBA262EB7F400CF735D /* SceneDelegate.m */,
 				00F84FBC262EB7F400CF735D /* ViewController.h */,
 				00F84FBD262EB7F400CF735D /* ViewController.m */,
+				00F84FF1262EBBBD00CF735D /* FCLinkedModel.h */,
+				00F84FF2262EBBBD00CF735D /* FCLinkedModel.m */,
 				00F84FBF262EB7F400CF735D /* Main.storyboard */,
 				00F84FC2262EB7F500CF735D /* Assets.xcassets */,
 				00F84FC4262EB7F500CF735D /* LaunchScreen.storyboard */,
@@ -267,6 +272,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00F84FBE262EB7F400CF735D /* ViewController.m in Sources */,
+				00F84FF3262EBBBD00CF735D /* FCLinkedModel.m in Sources */,
 				00F84FB8262EB7F400CF735D /* AppDelegate.m in Sources */,
 				00F84FC9262EB7F500CF735D /* main.m in Sources */,
 				00F84FBB262EB7F400CF735D /* SceneDelegate.m in Sources */,
@@ -442,6 +448,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = FHH9C24NAT;
 				INFOPLIST_FILE = LeetCode/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -459,6 +466,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = FHH9C24NAT;
 				INFOPLIST_FILE = LeetCode/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
