@@ -29,6 +29,8 @@
     [self quickSort:[randomList mutableCopy] left:0 right:randomList.count - 1];
     //冒泡
     [self bubbleSort:[randomList mutableCopy]];
+    //选择排序
+    [self selectSort:[randomList mutableCopy]];
 }
 
 #pragma mark - 二分查找
@@ -114,6 +116,22 @@
         }
     }
     NSLog(@"冒泡排序 %@",list);
+}
+
+#pragma mark - 选择排序
+- (void)selectSort:(NSMutableArray *)list {
+    for (NSInteger i = 0; i < list.count; i++) {
+        NSInteger i_value = [self countFromArray:list index:i];
+        for (NSInteger j = i+1; j < list.count; j++) {
+            NSInteger j_value = [self countFromArray:list index:j];
+            if (j_value < i_value) {
+                list[j] = @(i_value);
+                i_value = j_value;
+            }
+        }
+        list[i] = @(i_value);
+    }
+    NSLog(@"选择排序 %@",list);
 }
 
 #pragma mark - Private
