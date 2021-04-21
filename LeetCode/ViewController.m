@@ -48,7 +48,24 @@
 #pragma mark - z字形打印二叉树
 - (void)printBinaryTreeLikeZ {
     FCBinaryTreeModel *tree = [self binaryTreeModel];
-    NSLog(@"z字形打印二叉树 %@",@(tree.value));
+//    NSInteger currentLine = 0;
+
+    [self printBinaryTreeNodeValue:tree];
+//    NSLog(@"z字形打印二叉树 %@",@(tree.value));
+}
+
+#pragma mark - 前序输出二叉树
+- (void)printBinaryTreeNodeValue:(FCBinaryTreeModel *)node {
+    NSLog(@"%@",@(node.value));
+    if (node.leftNode || node.rightNode) {
+        if (node.leftNode) {
+            [self printBinaryTreeNodeValue:node.leftNode];
+        }
+
+        if (node.rightNode) {
+            [self printBinaryTreeNodeValue:node.rightNode];
+        }
+    }
 }
 
 #pragma mark - 反转二叉树
@@ -291,6 +308,10 @@
         [self isPalindromicCount:1001001];
     } else if ([title isEqualToString:@"反转链表"]) {
         [self revertLinkList];
+    } else if ([title isEqualToString:@"z字形打印二叉树"]) {
+        [self printBinaryTreeLikeZ];
+    } else {
+        NSLog(@"点击事件未实现");
     }
 }
 
