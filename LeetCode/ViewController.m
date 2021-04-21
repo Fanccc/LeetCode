@@ -112,7 +112,21 @@
 #pragma mark - 从上向下打印二叉树
 //二叉树的层数遍历
 - (void)printBinaryTreeFromTopToBottom:(FCBinaryTreeModel *)tree {
-//https://leetcode-cn.com/problems/binary-tree-level-order-traversal/
+    NSMutableArray *listArray = [NSMutableArray array];
+    [listArray addObject:tree];
+    while (listArray.count > 0) {
+        NSMutableArray *tempArray = [NSMutableArray array];
+        for (FCBinaryTreeModel *node in listArray) {
+            if (node.leftNode) {
+                [tempArray addObject:node.leftNode];
+            }
+            if (node.rightNode) {
+                [tempArray addObject:node.rightNode];
+            }
+        }
+        [listArray removeAllObjects];
+        [listArray addObjectsFromArray:tempArray];
+    }
 }
 
 #pragma mark - 判断一个二叉树是不是平衡二叉树（不适用递归）
