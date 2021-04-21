@@ -33,9 +33,16 @@
     [self selectSort:[randomList mutableCopy]];
     //回文串
     [self isPalindromicCount:1001001];
+
+    //反转链表
+    [self revertLinkList];
 }
 
 #pragma mark - 反转链表
+- (void)revertLinkList {
+    NSArray *list = [self linkedListArray];
+    [self printLinkList:list];
+}
 
 #pragma mark - 两个数组合并有序数组
 
@@ -50,6 +57,7 @@
 #pragma mark - 无重复字符的最长子串
 
 #pragma mark - 回文数
+/// 时间复杂度：O(logn)
 - (void)isPalindromicCount:(NSInteger)count {
     BOOL is = NO;
     NSInteger printValue = count;
@@ -173,6 +181,39 @@
 - (NSInteger)countFromArray:(NSArray *)array index:(NSInteger)index {
     NSNumber *number = array[index];
     return number.integerValue;
+}
+
+- (NSArray *)linkedListArray {
+    FCLinkedModel *link1 = [[FCLinkedModel alloc] init];
+    FCLinkedModel *link2 = [[FCLinkedModel alloc] init];
+    FCLinkedModel *link3 = [[FCLinkedModel alloc] init];
+    FCLinkedModel *link4 = [[FCLinkedModel alloc] init];
+    FCLinkedModel *link5 = [[FCLinkedModel alloc] init];
+
+    link1.value = 1;
+    link2.value = 2;
+    link3.value = 3;
+    link4.value = 4;
+    link5.value = 5;
+
+    link1.nextValue = link2;
+    link2.nextValue = link3;
+    link3.nextValue = link4;
+    link4.nextValue = link5;
+    link5.nextValue = nil;
+
+    return @[link1,link2,link5,link4,link5];
+}
+
+- (void)printLinkList:(NSArray *)list {
+    NSString *printStr = @"";
+    for (FCLinkedModel *model in list) {
+        if (printStr.length > 0) {
+            printStr = [printStr stringByAppendingString:@"->"];
+        }
+        printStr = [printStr stringByAppendingString:[NSString stringWithFormat:@"%@",@(model.value)]];
+    }
+    NSLog(@"链表输出值 %@",printStr);
 }
 
 @end
