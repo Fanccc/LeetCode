@@ -7,6 +7,7 @@
 
 #import "ViewController.h"
 #import "FCLinkedModel.h"
+#import "FCBinaryTreeModel.h"
 
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -45,6 +46,14 @@
 #pragma mark - 判断两个链表是否有交集
 
 #pragma mark - z字形打印二叉树
+- (void)printBinaryTreeLikeZ {
+    FCBinaryTreeModel *tree = [self binaryTreeModel];
+    NSLog(@"z字形打印二叉树 %@",@(tree.value));
+}
+
+#pragma mark - 反转二叉树
+
+#pragma mark - 从上向下打印二叉树
 
 #pragma mark - 判断一个二叉树是不是平衡二叉树（不适用递归）
 
@@ -173,12 +182,13 @@
     NSLog(@"选择排序 %@",list);
 }
 
-#pragma mark - Private
+#pragma mark - 数组相关
 - (NSInteger)countFromArray:(NSArray *)array index:(NSInteger)index {
     NSNumber *number = array[index];
     return number.integerValue;
 }
 
+#pragma mark - 链表数据源
 - (FCLinkedModel *)linkedList {
     FCLinkedModel *link1 = [[FCLinkedModel alloc] init];
     FCLinkedModel *link2 = [[FCLinkedModel alloc] init];
@@ -211,6 +221,42 @@
     NSLog(@"链表输出值 %@",printStr);
 }
 
+#pragma mark - 二叉树数据源
+- (FCBinaryTreeModel *)binaryTreeModel {
+    FCBinaryTreeModel *root = [self rootBinaryTreeNode:1 leftValue:2 rightValue:3];
+    [self subBinaryTreeNode:root.leftNode leftValue:4 rightValue:5];
+    [self subBinaryTreeNode:root.rightNode leftValue:6 rightValue:7];
+    return root;
+}
+
+/// 创建二叉树根节点
+- (FCBinaryTreeModel *)rootBinaryTreeNode:(NSInteger)rootValue leftValue:(NSInteger)leftValue rightValue:(NSInteger)rightValue {
+    //左节点
+    FCBinaryTreeModel *leftNode = [[FCBinaryTreeModel alloc] init];
+    leftNode.value = leftValue;
+    //右节点
+    FCBinaryTreeModel *rightNode = [[FCBinaryTreeModel alloc] init];
+    rightNode.value = rightValue;
+    //根节点
+    FCBinaryTreeModel *rootNode = [[FCBinaryTreeModel alloc] init];
+    rootNode.value = 1;
+    rootNode.leftNode = leftNode;
+    rootNode.rightNode = rightNode;
+    return rootNode;
+}
+
+/// 绑定二叉树值
+- (void)subBinaryTreeNode:(FCBinaryTreeModel *)rootNode leftValue:(NSInteger)leftValue rightValue:(NSInteger)rightValue {
+    //左节点
+    FCBinaryTreeModel *leftNode = [[FCBinaryTreeModel alloc] init];
+    leftNode.value = leftValue;
+    //右节点
+    FCBinaryTreeModel *rightNode = [[FCBinaryTreeModel alloc] init];
+    rightNode.value = rightValue;
+    //根节点
+    rootNode.leftNode = leftNode;
+    rootNode.rightNode = rightNode;
+}
 
 #pragma mark - UITableView
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -257,6 +303,8 @@
             @"两个数组合并有序数组",
             @"判断两个链表是否有交集",
             @"z字形打印二叉树",
+            @"反转二叉树",
+            @"从上向下打印二叉树",
             @"判断一个二叉树是不是平衡二叉树（不适用递归）",
             @"判断一个二叉树是不是搜索二叉树",
             @"无重复字符的最长子串",
