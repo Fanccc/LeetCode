@@ -105,10 +105,8 @@
         FCBinaryTreeModel *rightNode = [self reversalBinaryTree:tree.rightNode];
         tree.leftNode = rightNode;
         tree.rightNode = leftNode;
-        return tree;
-    } else {
-        return nil;
     }
+    return tree;
 }
 
 #pragma mark - 从上向下打印二叉树
