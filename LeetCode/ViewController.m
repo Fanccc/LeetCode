@@ -99,6 +99,17 @@
 }
 
 #pragma mark - 反转二叉树
+- (FCBinaryTreeModel *)reversalBinaryTree:(FCBinaryTreeModel *)tree {
+    if (tree.leftNode || tree.rightNode) {
+        FCBinaryTreeModel *leftNode = [self reversalBinaryTree:tree.leftNode];
+        FCBinaryTreeModel *rightNode = [self reversalBinaryTree:tree.rightNode];
+        tree.leftNode = rightNode;
+        tree.rightNode = leftNode;
+        return tree;
+    } else {
+        return nil;
+    }
+}
 
 #pragma mark - 从上向下打印二叉树
 
@@ -273,8 +284,6 @@
     FCBinaryTreeModel *root = [self rootBinaryTreeNode:1 leftValue:2 rightValue:3];
     [self subBinaryTreeNode:root.leftNode leftValue:4 rightValue:5];
     [self subBinaryTreeNode:root.rightNode leftValue:6 rightValue:7];
-    [self subBinaryTreeNode:root.rightNode.leftNode leftValue:8 rightValue:9];
-
     return root;
 }
 
@@ -342,6 +351,9 @@
         [self revertLinkList];
     } else if ([title isEqualToString:@"z字形打印二叉树"]) {
         [self printBinaryTreeLikeZ];
+    } else if ([title isEqual:@"反转二叉树"]) {
+        FCBinaryTreeModel *treeNode = [self reversalBinaryTree:[self binaryTreeModel]];
+        [self printBinaryTreeNodeValue:treeNode];
     } else {
         NSLog(@"点击事件未实现");
     }
