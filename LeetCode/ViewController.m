@@ -112,6 +112,10 @@
 }
 
 #pragma mark - 从上向下打印二叉树
+//二叉树的层数遍历
+- (void)printBinaryTreeFromTopToBottom:(FCBinaryTreeModel *)tree {
+//https://leetcode-cn.com/problems/binary-tree-level-order-traversal/
+}
 
 #pragma mark - 判断一个二叉树是不是平衡二叉树（不适用递归）
 
@@ -351,9 +355,12 @@
         [self revertLinkList];
     } else if ([title isEqualToString:@"z字形打印二叉树"]) {
         [self printBinaryTreeLikeZ];
-    } else if ([title isEqual:@"反转二叉树"]) {
+    } else if ([title isEqualToString:@"反转二叉树"]) {
         FCBinaryTreeModel *treeNode = [self reversalBinaryTree:[self binaryTreeModel]];
         [self printBinaryTreeNodeValue:treeNode];
+    } else if ([title isEqualToString:@"从上向下打印二叉树"]) {
+        FCBinaryTreeModel *treeNode = [self reversalBinaryTree:[self binaryTreeModel]];
+        [self printBinaryTreeFromTopToBottom:treeNode];
     } else {
         NSLog(@"点击事件未实现");
     }
