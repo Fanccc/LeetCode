@@ -31,6 +31,41 @@
     [self bubbleSort:[randomList mutableCopy]];
     //选择排序
     [self selectSort:[randomList mutableCopy]];
+    //回文串
+    [self isPalindromicCount:1001001];
+}
+
+#pragma mark - 反转链表
+
+#pragma mark - 两个数组合并有序数组
+
+#pragma mark - 判断两个链表是否有交集
+
+#pragma mark - z字形打印二叉树
+
+#pragma mark - 判断一个二叉树是不是平衡二叉树（不适用递归）
+
+#pragma mark - 判断一个二叉树是不是搜索二叉树
+
+#pragma mark - 无重复字符的最长子串
+
+#pragma mark - 回文数
+- (void)isPalindromicCount:(NSInteger)count {
+    BOOL is = NO;
+    NSInteger printValue = count;
+    if (count <= 10) {
+        is = NO;
+    } else {
+        NSInteger revertedNum = 0;
+        while (count > revertedNum) {
+            revertedNum = revertedNum*10 + count%10;
+            count = count / 10;
+        }
+        if (count == revertedNum || count == revertedNum/10) {
+            is = YES;
+        }
+    }
+    NSLog(@"%@ 是不是回文数 %@",@(printValue),@(is));
 }
 
 #pragma mark - 二分查找
