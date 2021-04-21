@@ -23,7 +23,13 @@
 
 #pragma mark - 反转链表
 - (void)revertLinkList {
-    NSArray *list = [self linkedListArray];
+    FCLinkedModel *list = [self linkedList];
+
+//    FCLinkedModel *tempModel = nil;
+//    for (FCLinkedModel *model in list) {
+//        <#statements#>
+//    }
+
     [self printLinkList:list];
 }
 
@@ -166,7 +172,7 @@
     return number.integerValue;
 }
 
-- (NSArray *)linkedListArray {
+- (FCLinkedModel *)linkedList {
     FCLinkedModel *link1 = [[FCLinkedModel alloc] init];
     FCLinkedModel *link2 = [[FCLinkedModel alloc] init];
     FCLinkedModel *link3 = [[FCLinkedModel alloc] init];
@@ -185,16 +191,15 @@
     link4.nextValue = link5;
     link5.nextValue = nil;
 
-    return @[link1,link2,link5,link4,link5];
+    return link1;
 }
 
-- (void)printLinkList:(NSArray *)list {
-    NSString *printStr = @"";
-    for (FCLinkedModel *model in list) {
-        if (printStr.length > 0) {
-            printStr = [printStr stringByAppendingString:@"->"];
-        }
-        printStr = [printStr stringByAppendingString:[NSString stringWithFormat:@"%@",@(model.value)]];
+- (void)printLinkList:(FCLinkedModel *)list {
+    NSString *printStr = [NSString stringWithFormat:@"%@",@(list.value)];
+    while (list.nextValue) {
+        printStr = [printStr stringByAppendingString:@"->"];
+        printStr = [printStr stringByAppendingString:[NSString stringWithFormat:@"%@",@(list.nextValue.value)]];
+        list = list.nextValue;
     }
     NSLog(@"链表输出值 %@",printStr);
 }
