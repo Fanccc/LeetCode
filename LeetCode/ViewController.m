@@ -48,10 +48,40 @@
 #pragma mark - z字形打印二叉树
 - (void)printBinaryTreeLikeZ {
     FCBinaryTreeModel *tree = [self binaryTreeModel];
-//    NSInteger currentLine = 0;
+    NSInteger currntLine = 0;
+    //偶数数组
+    NSMutableArray *evenArr = [NSMutableArray array];
+    //奇数数组
+    NSMutableArray *oddArr = [NSMutableArray array];
+    [evenArr addObject:tree];
 
-    [self printBinaryTreeNodeValue:tree];
-//    NSLog(@"z字形打印二叉树 %@",@(tree.value));
+    while (evenArr.count > 0 || oddArr.count > 0) {
+        if (currntLine%2 == 0) {
+            [evenArr enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(FCBinaryTreeModel  *node, NSUInteger idx, BOOL * _Nonnull stop) {
+                NSLog(@"%@",@(node.value));
+                if (node.leftNode) {
+                    [oddArr addObject:node.leftNode];
+                }
+                if (node.rightNode) {
+                    [oddArr addObject:node.rightNode];
+                }
+            }];
+            [evenArr removeAllObjects];
+        } else {
+            //奇数行
+            [oddArr enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(FCBinaryTreeModel  *node, NSUInteger idx, BOOL * _Nonnull stop) {
+                NSLog(@"%@",@(node.value));
+                if (node.rightNode) {
+                    [evenArr addObject:node.rightNode];
+                }
+                if (node.leftNode) {
+                    [evenArr addObject:node.leftNode];
+                }
+            }];
+            [oddArr removeAllObjects];
+        }
+        currntLine++;
+    }
 }
 
 #pragma mark - 前序输出二叉树
