@@ -273,6 +273,8 @@
     FCBinaryTreeModel *root = [self rootBinaryTreeNode:1 leftValue:2 rightValue:3];
     [self subBinaryTreeNode:root.leftNode leftValue:4 rightValue:5];
     [self subBinaryTreeNode:root.rightNode leftValue:6 rightValue:7];
+    [self subBinaryTreeNode:root.rightNode.leftNode leftValue:8 rightValue:9];
+
     return root;
 }
 
