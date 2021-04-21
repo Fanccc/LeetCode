@@ -15,8 +15,24 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="h2Q-Kp-0ta">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="393-qZ-7G6"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="fsm-LN-osn"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="h2Q-Kp-0ta" secondAttribute="trailing" id="Dha-8A-zbs"/>
+                            <constraint firstItem="h2Q-Kp-0ta" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Xeg-Vk-8xv"/>
+                            <constraint firstItem="h2Q-Kp-0ta" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="wki-81-EWh"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="h2Q-Kp-0ta" secondAttribute="bottom" id="zwk-yS-8rr"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="fXD-5j-1bP"/>
                 </viewController>

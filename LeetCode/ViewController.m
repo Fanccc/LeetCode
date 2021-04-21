@@ -8,7 +8,9 @@
 #import "ViewController.h"
 #import "FCLinkedModel.h"
 
-@interface ViewController ()
+@interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
+
+@property (nonatomic, copy) NSArray *tableListArray;
 
 @end
 
@@ -17,25 +19,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-
-    //二分查找,用于有序的队列
-    NSArray *list = @[@0,@1,@3,@4,@6,@8];
-    NSInteger target = 3;
-    NSInteger index = [self binarySearch:list target:target];
-    NSLog(@"二分查找 %@",@(index));
-
-    NSArray *randomList = @[@7,@5,@2,@9,@6,@8,@7,@999];
-    //快排
-    [self quickSort:[randomList mutableCopy] left:0 right:randomList.count - 1];
-    //冒泡
-    [self bubbleSort:[randomList mutableCopy]];
-    //选择排序
-    [self selectSort:[randomList mutableCopy]];
-    //回文串
-    [self isPalindromicCount:1001001];
-
-    //反转链表
-    [self revertLinkList];
 }
 
 #pragma mark - 反转链表
@@ -214,6 +197,65 @@
         printStr = [printStr stringByAppendingString:[NSString stringWithFormat:@"%@",@(model.value)]];
     }
     NSLog(@"链表输出值 %@",printStr);
+}
+
+
+#pragma mark - UITableView
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.tableListArray.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell_identifier"];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell_identifier"];
+    }
+    cell.textLabel.text = self.tableListArray[indexPath.row];
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSArray *list = @[@0,@1,@3,@4,@6,@8];
+    NSArray *randomList = @[@7,@5,@2,@9,@6,@8,@7,@999];
+
+    NSString *title = self.tableListArray[indexPath.row];
+    if ([title isEqualToString:@"二分查找"]) {
+        NSInteger target = 3;
+        NSInteger index = [self binarySearch:list target:target];
+        NSLog(@"二分查找 %@",@(index));
+    } else if ([title isEqualToString:@"快速排序"]) {
+        [self quickSort:[randomList mutableCopy] left:0 right:randomList.count - 1];
+    } else if ([title isEqualToString:@"冒泡排序"]) {
+        [self bubbleSort:[randomList mutableCopy]];
+    } else if ([title isEqualToString:@"选择排序"]) {
+        [self selectSort:[randomList mutableCopy]];
+    } else if ([title isEqualToString:@"回文数"]) {
+        [self isPalindromicCount:1001001];
+    } else if ([title isEqualToString:@"反转链表"]) {
+        [self revertLinkList];
+    }
+}
+
+#pragma mark - lazy
+- (NSArray *)tableListArray {
+
+    if (!_tableListArray) {
+        _tableListArray = @[
+            @"反转链表",
+            @"两个数组合并有序数组",
+            @"判断两个链表是否有交集",
+            @"z字形打印二叉树",
+            @"判断一个二叉树是不是平衡二叉树（不适用递归）",
+            @"判断一个二叉树是不是搜索二叉树",
+            @"无重复字符的最长子串",
+            @"回文数",
+            @"二分查找",
+            @"快速排序",
+            @"冒泡排序",
+            @"选择排序"
+        ];
+    }
+    return _tableListArray;
 }
 
 @end
