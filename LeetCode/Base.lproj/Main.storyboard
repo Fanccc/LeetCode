@@ -40,33 +40,6 @@
             </objects>
             <point key="canvasLocation" x="178" y="-654"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="NiF-Ny-LfT">
-            <objects>
-                <viewController id="NCk-rO-yLH" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="06c-gY-MaK">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C7x-9r-eXO">
-                                <rect key="frame" x="86" y="370" width="247" height="213"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemOrangeColor"/>
-                                <state key="normal" title="Push"/>
-                                <connections>
-                                    <segue destination="BYZ-38-t0r" kind="push" id="KKD-5g-Bee"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="BFB-JZ-2Hr"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="188-Mg-dll"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="IOM-ZB-bOj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-581.15942028985512" y="-654.24107142857144"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="lT3-Vn-FUw">
             <objects>
@@ -76,7 +49,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="NCk-rO-yLH" kind="relationship" relationship="rootViewController" id="vFY-6e-HQC"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="2RW-Nh-9xT"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VMJ-U3-cbf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -87,9 +60,6 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

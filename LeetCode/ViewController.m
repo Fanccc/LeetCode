@@ -25,12 +25,19 @@
 - (void)revertLinkList {
     FCLinkedModel *list = [self linkedList];
 
-//    FCLinkedModel *tempModel = nil;
-//    for (FCLinkedModel *model in list) {
-//        <#statements#>
-//    }
-
-    [self printLinkList:list];
+    //迭代实现
+    /**
+     时间复杂度 O(n)
+     空间复杂度 0(1)
+     */
+    FCLinkedModel *prev = nil;
+    while (list) {
+        FCLinkedModel *nextModel = list.nextValue;
+        list.nextValue = prev;
+        prev = list;
+        list = nextModel;
+    }
+    [self printLinkList:prev];
 }
 
 #pragma mark - 两个数组合并有序数组
