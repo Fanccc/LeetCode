@@ -100,12 +100,22 @@
 
 #pragma mark - 中序输出二叉树
 - (void)printBinaryTreeFromMiddleTraversal:(FCBinaryTreeModel *)node {
+    //左根右
+    if (!node) {
+        return;
+    }
 
+    NSLog(@"%@",@(node.value));
 }
 
 #pragma mark - 后序输出二叉树
 - (void)printBinaryTreeFromPostorderTraversal:(FCBinaryTreeModel *)node {
-
+    if (!node) {
+        return;
+    }
+    [self printBinaryTreeFromPostorderTraversal:node.leftNode];
+    [self printBinaryTreeFromPostorderTraversal:node.rightNode];
+    NSLog(@"%@",@(node.value));
 }
 
 #pragma mark - 二叉树的深度
