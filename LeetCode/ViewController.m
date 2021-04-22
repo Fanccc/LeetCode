@@ -165,17 +165,30 @@
 /**
  输入一棵二叉树的根节点，判断该树是不是平衡二叉树。如果某二叉树中任意节点的左右子树的深度相差不超过1，那么它就是一棵平衡二叉树。
  */
-- (BOOL)binaryIsBalanceBianryTree:(FCBinaryTreeModel *)node {
-    NSInteger left = [self binaryDepth:node.leftNode];
-    NSInteger right = [self binaryDepth:node.rightNode];
-
-    NSInteger offset = right - left;
-    if (labs(offset) > 1) {
-        NSLog(@"不是平衡二叉树");
-        return NO;
-    } else {
+- (void)binaryIsBalanceBianryTree:(FCBinaryTreeModel *)node {
+    if ([self recur:node] != -1) {
         NSLog(@"是平衡二叉树");
-        return YES;
+    } else {
+        NSLog(@"不是平衡二叉树");
+    }
+}
+
+- (NSInteger)recur:(FCBinaryTreeModel *)node {
+    if (!node) {
+        return 0;
+    }
+    NSInteger left = [self recur:node.leftNode];
+    if (left == -1) {
+        return -1;
+    }
+    NSInteger right = [self recur:node.rightNode];
+    if (right == -1) {
+        return -1;
+    }
+    if (labs(left - right) < 2) {
+        return MAX(left, right) + 1;
+    } else {
+        return -1;
     }
 }
 
