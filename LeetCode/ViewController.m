@@ -148,6 +148,7 @@
     while (listArray.count > 0) {
         NSMutableArray *tempArray = [NSMutableArray array];
         for (FCBinaryTreeModel *node in listArray) {
+            NSLog(@"%@",@(node.value));
             if (node.leftNode) {
                 [tempArray addObject:node.leftNode];
             }
@@ -164,8 +165,18 @@
 /**
  输入一棵二叉树的根节点，判断该树是不是平衡二叉树。如果某二叉树中任意节点的左右子树的深度相差不超过1，那么它就是一棵平衡二叉树。
  */
-- (void)binaryIsBalanceBianryTree:(FCBinaryTreeModel *)node {
+- (BOOL)binaryIsBalanceBianryTree:(FCBinaryTreeModel *)node {
+    NSInteger left = [self binaryDepth:node.leftNode];
+    NSInteger right = [self binaryDepth:node.rightNode];
 
+    NSInteger offset = right - left;
+    if (labs(offset) > 1) {
+        NSLog(@"不是平衡二叉树");
+        return NO;
+    } else {
+        NSLog(@"是平衡二叉树");
+        return YES;
+    }
 }
 
 #pragma mark - 判断一个二叉树是不是搜索二叉树
@@ -338,6 +349,7 @@
     [self subBinaryTreeNode:root.leftNode leftValue:4 rightValue:5];
     [self subBinaryTreeNode:root.rightNode leftValue:6 rightValue:7];
     [self subBinaryTreeNode:root.leftNode.rightNode leftValue:8 rightValue:9];
+    [self subBinaryTreeNode:root.leftNode.rightNode.leftNode leftValue:10 rightValue:11];
     return root;
 }
 
@@ -409,11 +421,9 @@
         FCBinaryTreeModel *treeNode = [self reversalBinaryTree:[self binaryTreeModel]];
         [self printBinaryTreeNodeValue:treeNode];
     } else if ([title isEqualToString:@"从上向下打印二叉树"]) {
-        FCBinaryTreeModel *treeNode = [self reversalBinaryTree:[self binaryTreeModel]];
-        [self printBinaryTreeFromTopToBottom:treeNode];
+        [self printBinaryTreeFromTopToBottom:[self binaryTreeModel]];
     } else if ([title isEqualToString:@"判断一个二叉树是不是平衡二叉树"]) {
-        FCBinaryTreeModel *treeNode = [self reversalBinaryTree:[self binaryTreeModel]];
-        [self binaryIsBalanceBianryTree:treeNode];
+        [self binaryIsBalanceBianryTree:[self binaryTreeModel]];
     } else if ([title isEqualToString:@"前序输出二叉树"]) {
         [self printBinaryTreeNodeValue:[self binaryTreeModel]];
     } else if ([title isEqualToString:@"中序输出二叉树"]) {
