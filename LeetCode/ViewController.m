@@ -110,7 +110,12 @@
 
 #pragma mark - 二叉树的深度
 - (NSInteger)binaryDepth:(FCBinaryTreeModel *)node {
-    return 0;
+    if (!node) {
+        return 0;
+    }
+    NSInteger left = [self binaryDepth:node.leftNode];
+    NSInteger right = [self binaryDepth:node.rightNode];
+    return MAX(left, right) + 1;
 }
 
 #pragma mark - 反转二叉树
@@ -321,6 +326,7 @@
     FCBinaryTreeModel *root = [self rootBinaryTreeNode:1 leftValue:2 rightValue:3];
     [self subBinaryTreeNode:root.leftNode leftValue:4 rightValue:5];
     [self subBinaryTreeNode:root.rightNode leftValue:6 rightValue:7];
+    [self subBinaryTreeNode:root.leftNode.rightNode leftValue:8 rightValue:9];
     return root;
 }
 
