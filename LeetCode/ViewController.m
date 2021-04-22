@@ -193,6 +193,14 @@
 }
 
 #pragma mark - 判断一个二叉树是不是搜索二叉树
+- (void)binaryIsSearchBianryTree:(FCBinaryTreeModel *)node {
+
+}
+
+#pragma mark - 判断一个二叉树是不是对称二叉树
+- (void)binaryIsSymmetryBianryTree:(FCBinaryTreeModel *)node {
+
+}
 
 #pragma mark - 无重复字符的最长子串
 
@@ -446,6 +454,10 @@
     } else if ([title isEqualToString:@"二叉树的深度"]) {
         NSInteger line = [self binaryDepth:[self binaryTreeModel]];
         NSLog(@"二叉树的深度 %@",@(line));
+    } else if ([title isEqualToString:@"判断一个二叉树是不是搜索二叉树"]) {
+        [self binaryIsSearchBianryTree:[self binaryTreeModel]];
+    } else if ([title isEqualToString:@"判断一个二叉树是不是对称二叉树"]) {
+        [self binaryIsSymmetryBianryTree:[self binaryTreeModel]];
     } else {
         NSLog(@"点击事件未实现");
     }
@@ -464,6 +476,7 @@
             @"从上向下打印二叉树",
             @"判断一个二叉树是不是平衡二叉树",
             @"判断一个二叉树是不是搜索二叉树",
+            @"判断一个二叉树是不是对称二叉树",
             @"前序输出二叉树",
             @"中序输出二叉树",
             @"后序输出二叉树",
