@@ -197,6 +197,11 @@
 
 }
 
+#pragma mark - 从前序与中序遍历序列构造二叉树
+- (void)buildBinaryFromList:(NSArray *)front middle:(NSArray *)middle {
+
+}
+
 #pragma mark - 判断一个二叉树是不是对称二叉树
 - (void)binaryIsSymmetryBianryTree:(FCBinaryTreeModel *)node {
     //采用队列方法,二者数据相同时为对称二叉树
@@ -555,6 +560,8 @@
         [self binaryIsSearchBianryTree:[self binaryTreeModel]];
     } else if ([title isEqualToString:@"判断一个二叉树是不是对称二叉树"]) {
         [self binaryIsSymmetryBianryTree:[self symmetryBinaryTreeModel]];
+    } else if ([title isEqualToString:@"从前序与中序遍历序列构造二叉树"]) {
+        [self buildBinaryFromList:@[@3,@9,@20,@15,@7] middle:@[@9,@3,@15,@20,@7]];
     } else {
         NSLog(@"点击事件未实现");
     }
@@ -577,6 +584,7 @@
             @"前序输出二叉树",
             @"中序输出二叉树",
             @"后序输出二叉树",
+            @"从前序与中序遍历序列构造二叉树"
             @"二叉树的深度",
             @"无重复字符的最长子串",
             @"回文数",
