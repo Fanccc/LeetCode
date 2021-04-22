@@ -98,6 +98,21 @@
     }
 }
 
+#pragma mark - 中序输出二叉树
+- (void)printBinaryTreeFromMiddleTraversal:(FCBinaryTreeModel *)node {
+
+}
+
+#pragma mark - 后序输出二叉树
+- (void)printBinaryTreeFromPostorderTraversal:(FCBinaryTreeModel *)node {
+
+}
+
+#pragma mark - 二叉树的深度
+- (NSInteger)binaryDepth:(FCBinaryTreeModel *)node {
+    return 0;
+}
+
 #pragma mark - 反转二叉树
 - (FCBinaryTreeModel *)reversalBinaryTree:(FCBinaryTreeModel *)tree {
     if (tree.leftNode || tree.rightNode) {
@@ -129,7 +144,13 @@
     }
 }
 
-#pragma mark - 判断一个二叉树是不是平衡二叉树（不适用递归）
+#pragma mark - 判断一个二叉树是不是平衡二叉树
+/**
+ 输入一棵二叉树的根节点，判断该树是不是平衡二叉树。如果某二叉树中任意节点的左右子树的深度相差不超过1，那么它就是一棵平衡二叉树。
+ */
+- (void)binaryIsBalanceBianryTree:(FCBinaryTreeModel *)node {
+
+}
 
 #pragma mark - 判断一个二叉树是不是搜索二叉树
 
@@ -373,6 +394,18 @@
     } else if ([title isEqualToString:@"从上向下打印二叉树"]) {
         FCBinaryTreeModel *treeNode = [self reversalBinaryTree:[self binaryTreeModel]];
         [self printBinaryTreeFromTopToBottom:treeNode];
+    } else if ([title isEqualToString:@"判断一个二叉树是不是平衡二叉树"]) {
+        FCBinaryTreeModel *treeNode = [self reversalBinaryTree:[self binaryTreeModel]];
+        [self binaryIsBalanceBianryTree:treeNode];
+    } else if ([title isEqualToString:@"前序输出二叉树"]) {
+        [self printBinaryTreeNodeValue:[self binaryTreeModel]];
+    } else if ([title isEqualToString:@"中序输出二叉树"]) {
+        [self printBinaryTreeFromMiddleTraversal:[self binaryTreeModel]];
+    } else if ([title isEqualToString:@"后序输出二叉树"]) {
+        [self printBinaryTreeFromPostorderTraversal:[self binaryTreeModel]];
+    } else if ([title isEqualToString:@"二叉树的深度"]) {
+        NSInteger line = [self binaryDepth:[self binaryTreeModel]];
+        NSLog(@"二叉树的深度 %@",@(line));
     } else {
         NSLog(@"点击事件未实现");
     }
@@ -389,8 +422,12 @@
             @"z字形打印二叉树",
             @"反转二叉树",
             @"从上向下打印二叉树",
-            @"判断一个二叉树是不是平衡二叉树（不适用递归）",
+            @"判断一个二叉树是不是平衡二叉树",
             @"判断一个二叉树是不是搜索二叉树",
+            @"前序输出二叉树",
+            @"中序输出二叉树",
+            @"后序输出二叉树",
+            @"二叉树的深度",
             @"无重复字符的最长子串",
             @"回文数",
             @"二分查找",
