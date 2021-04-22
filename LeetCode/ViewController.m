@@ -104,8 +104,9 @@
     if (!node) {
         return;
     }
-
+    [self printBinaryTreeFromMiddleTraversal:node.leftNode];
     NSLog(@"%@",@(node.value));
+    [self printBinaryTreeFromMiddleTraversal:node.rightNode];
 }
 
 #pragma mark - 后序输出二叉树
