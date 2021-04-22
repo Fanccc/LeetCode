@@ -205,17 +205,58 @@
 
     NSMutableArray *right = [NSMutableArray array];
     [right addObject:node.rightNode];
-    [self currentLeftTree:node.rightNode arr:right];
+    [self currentRightTree:node.rightNode arr:right];
+    BOOL is = NO;
+    NSInteger repetCount = 0;
+    if (left.count == right.count) {
+        for (NSInteger i = 0; i < left.count; i++) {
+            FCBinaryTreeModel *left_node = left[i];
+            FCBinaryTreeModel *right_node = right[i];
+            if (left_node.value == right_node.value) {
+                repetCount++;
+            } else {
+                is = NO;
+                break;
+            }
+        }
+        if (repetCount == left.count) {
+            is = YES;
+        }
+    }
 
-
+    if (is) {
+        NSLog(@"是平衡二叉树");
+    } else {
+        NSLog(@"不是平衡二叉树");
+    }
 }
 
 - (void)currentLeftTree:(FCBinaryTreeModel *)node arr:(NSMutableArray *)arr {
+    if (node.leftNode || node.rightNode) {
+        if (node.leftNode) {
+            [arr addObject:node.leftNode];
+        }
+        [self currentLeftTree:node.leftNode arr:arr];
 
+        if (node.rightNode) {
+            [arr addObject:node.rightNode];
+        }
+        [self currentLeftTree:node.rightNode arr:arr];
+    }
 }
 
 - (void)currentRightTree:(FCBinaryTreeModel *)node arr:(NSMutableArray *)arr {
+    if (node.leftNode || node.rightNode) {
+        if (node.rightNode) {
+            [arr addObject:node.rightNode];
+        }
+        [self currentRightTree:node.rightNode arr:arr];
 
+        if (node.leftNode) {
+            [arr addObject:node.leftNode];
+        }
+        [self currentRightTree:node.leftNode arr:arr];
+    }
 }
 
 #pragma mark - 无重复字符的最长子串
