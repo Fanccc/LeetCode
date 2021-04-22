@@ -199,6 +199,22 @@
 
 #pragma mark - 判断一个二叉树是不是对称二叉树
 - (void)binaryIsSymmetryBianryTree:(FCBinaryTreeModel *)node {
+    NSMutableArray *left = [NSMutableArray array];
+    [left addObject:node.leftNode];
+    [self currentLeftTree:node.leftNode arr:left];
+
+    NSMutableArray *right = [NSMutableArray array];
+    [right addObject:node.rightNode];
+    [self currentLeftTree:node.rightNode arr:right];
+
+
+}
+
+- (void)currentLeftTree:(FCBinaryTreeModel *)node arr:(NSMutableArray *)arr {
+
+}
+
+- (void)currentRightTree:(FCBinaryTreeModel *)node arr:(NSMutableArray *)arr {
 
 }
 
@@ -374,6 +390,16 @@
     return root;
 }
 
+//对称二叉树
+- (FCBinaryTreeModel *)symmetryBinaryTreeModel {
+    FCBinaryTreeModel *root = [self rootBinaryTreeNode:1 leftValue:2 rightValue:2];
+    [self subBinaryTreeNode:root.leftNode leftValue:3 rightValue:4];
+    [self subBinaryTreeNode:root.rightNode leftValue:4 rightValue:3];
+    [self subBinaryTreeNode:root.leftNode.leftNode leftValue:6 rightValue:5];
+    [self subBinaryTreeNode:root.rightNode.rightNode leftValue:5 rightValue:6];
+    return root;
+}
+
 /// 创建二叉树根节点
 - (FCBinaryTreeModel *)rootBinaryTreeNode:(NSInteger)rootValue leftValue:(NSInteger)leftValue rightValue:(NSInteger)rightValue {
     //左节点
@@ -446,18 +472,18 @@
     } else if ([title isEqualToString:@"判断一个二叉树是不是平衡二叉树"]) {
         [self binaryIsBalanceBianryTree:[self binaryTreeModel]];
     } else if ([title isEqualToString:@"前序输出二叉树"]) {
-        [self printBinaryTreeNodeValue:[self binaryTreeModel]];
+        [self printBinaryTreeNodeValue:[self symmetryBinaryTreeModel]];
     } else if ([title isEqualToString:@"中序输出二叉树"]) {
-        [self printBinaryTreeFromMiddleTraversal:[self binaryTreeModel]];
+        [self printBinaryTreeFromMiddleTraversal:[self symmetryBinaryTreeModel]];
     } else if ([title isEqualToString:@"后序输出二叉树"]) {
-        [self printBinaryTreeFromPostorderTraversal:[self binaryTreeModel]];
+        [self printBinaryTreeFromPostorderTraversal:[self symmetryBinaryTreeModel]];
     } else if ([title isEqualToString:@"二叉树的深度"]) {
         NSInteger line = [self binaryDepth:[self binaryTreeModel]];
         NSLog(@"二叉树的深度 %@",@(line));
     } else if ([title isEqualToString:@"判断一个二叉树是不是搜索二叉树"]) {
         [self binaryIsSearchBianryTree:[self binaryTreeModel]];
     } else if ([title isEqualToString:@"判断一个二叉树是不是对称二叉树"]) {
-        [self binaryIsSymmetryBianryTree:[self binaryTreeModel]];
+        [self binaryIsSymmetryBianryTree:[self symmetryBinaryTreeModel]];
     } else {
         NSLog(@"点击事件未实现");
     }
