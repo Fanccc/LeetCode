@@ -199,6 +199,36 @@
 
 #pragma mark - 判断一个二叉树是不是对称二叉树
 - (void)binaryIsSymmetryBianryTree:(FCBinaryTreeModel *)node {
+    //采用队列方法,二者数据相同时为对称二叉树
+//    [self binaryIsSymmetryBianryTree_A:node];
+
+    BOOL is = [self checkIsSymmetryBianryTree:node rightNode:node];
+    if (is) {
+        NSLog(@"是对称二叉树");
+    } else {
+        NSLog(@"不是对称二叉树");
+    }
+}
+
+//平衡二叉树最优解,时间复杂度O(n)
+- (BOOL)checkIsSymmetryBianryTree:(FCBinaryTreeModel *)leftNode rightNode:(FCBinaryTreeModel *)rightNode {
+    if (!leftNode && !rightNode) {
+        return YES;
+    } else if (!leftNode || !rightNode) {
+        return NO;
+    } else {
+        if (leftNode.value == rightNode.value &&
+            [self checkIsSymmetryBianryTree:leftNode.leftNode rightNode:rightNode.rightNode] &&
+            [self checkIsSymmetryBianryTree:leftNode.rightNode rightNode:rightNode.leftNode]) {
+            return YES;
+        } else {
+            return NO;
+        }
+    }
+}
+
+//队列形式对称二叉树
+- (void)binaryIsSymmetryBianryTree_A:(FCBinaryTreeModel *)node {
     NSMutableArray *left = [NSMutableArray array];
     [left addObject:node.leftNode];
     [self currentLeftTree:node.leftNode arr:left];
