@@ -277,7 +277,8 @@
  所有左子树和右子树自身必须也是二叉搜索树。
  */
 - (void)binaryIsSearchBianryTree:(FCBinaryTreeModel *)node {
-    BOOL isSearchBinary = [self isSearchBinary:node minValue:INT64_MIN maxValue:INT64_MAX];
+//    BOOL isSearchBinary = [self isSearchBinary:node minValue:INT64_MIN maxValue:INT64_MAX];
+    BOOL isSearchBinary = [self isBSTTreeFormMiddleTraversal:node];
     NSLog(@"是不是搜索二叉树 %@",@(isSearchBinary));
 }
 
@@ -289,6 +290,30 @@
         return NO;
     }
     return [self isSearchBinary:node.leftNode minValue:minValue maxValue:node.value] && [self isSearchBinary:node.rightNode minValue:node.value maxValue:maxValue];
+}
+
+/**
+ 判断是不是搜索二叉树,采用中序遍历方法,满足进栈后从小到大的线性列表
+ https://leetcode-cn.com/problems/validate-binary-search-tree/solution/yan-zheng-er-cha-sou-suo-shu-by-leetcode-solution/
+ */
+- (BOOL)isBSTTreeFormMiddleTraversal:(FCBinaryTreeModel *)node {
+    NSMutableArray *stack = [NSMutableArray array];
+    NSInteger inorder = -1;
+    while (stack.count > 0 || node) {
+        while (node) {
+            [stack addObject:node];
+            node = node.leftNode;
+        }
+
+        node = stack.lastObject;
+        [stack removeLastObject];
+        if (node.value <= inorder) {
+            return NO;
+        }
+        inorder = node.value;
+        node = node.rightNode;
+    }
+    return YES;
 }
 
 #pragma mark - 从前序与中序遍历序列构造二叉树
