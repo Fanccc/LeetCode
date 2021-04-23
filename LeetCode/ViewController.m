@@ -317,8 +317,45 @@
 }
 
 #pragma mark - 从前序与中序遍历序列构造二叉树
-- (void)buildBinaryFromList:(NSArray *)front middle:(NSArray *)middle {
+- (void)buildBinaryFromList:(NSArray *)preorder middle:(NSArray *)inorder {
+    NSInteger n = preorder.count;
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    for (NSInteger i = 0; i < inorder.count; i++) {
+        [dic setObject:@(i) forKey:inorder[i]];
+    }
+    FCBinaryTreeModel *node = [self buildTree:preorder inorder:inorder preLeft:0 preRight:n-1 inorderLeft:0 inorderRight:n-1 map:dic];
+    /**
+     preorder [@3,@9,@20,@15,@7]
+     inorder [@9,@3,@15,@20,@7]
+     */
+    [self printBinaryTreeNodeValue:node];
+    NSLog(@">>>>>");
+    [self printBinaryTreeFromMiddleTraversal:node];
+}
 
+- (FCBinaryTreeModel *)buildTree:(NSArray *)preorder
+                         inorder:(NSArray *)inordere
+                         preLeft:(NSInteger)preLeft
+                        preRight:(NSInteger)preRight
+                     inorderLeft:(NSInteger)inorderLeft
+                    inorderRight:(NSInteger)inorderRight map:(NSDictionary *)dic {
+    if (preLeft > preRight) {
+        return nil;
+    }
+
+    NSInteger pre_root = preLeft;
+    //获取当前根节点在中序遍历中的下标
+    NSInteger inorder_root = [[dic objectForKey:preorder[pre_root]] integerValue];
+
+    FCBinaryTreeModel *root = [[FCBinaryTreeModel alloc] init];
+    root.value = [preorder[pre_root] integerValue];
+    // 得到左子树中的节点数目
+    NSInteger size_left_subtree = inorder_root - inorderLeft;
+    // 递归左树
+    root.leftNode = [self buildTree:preorder inorder:inordere preLeft:preLeft+1 preRight:preLeft+1+size_left_subtree inorderLeft:inorderLeft inorderRight:inorder_root-1 map:dic];
+    // 递归右树
+    root.rightNode = [self buildTree:preorder inorder:inordere preLeft:preLeft+1+size_left_subtree+1 preRight:preRight inorderLeft:inorder_root+1 inorderRight:inorderRight map:dic];
+    return root;
 }
 
 #pragma mark - 判断一个二叉树是不是对称二叉树
