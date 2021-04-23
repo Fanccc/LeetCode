@@ -352,9 +352,9 @@
     // 得到左子树中的节点数目
     NSInteger size_left_subtree = inorder_root - inorderLeft;
     // 递归左树
-    root.leftNode = [self buildTree:preorder inorder:inordere preLeft:preLeft+1 preRight:preLeft+1+size_left_subtree inorderLeft:inorderLeft inorderRight:inorder_root-1 map:dic];
+    root.leftNode = [self buildTree:preorder inorder:inordere preLeft:preLeft+1 preRight:preLeft+size_left_subtree inorderLeft:inorderLeft inorderRight:inorder_root-1 map:dic];
     // 递归右树
-    root.rightNode = [self buildTree:preorder inorder:inordere preLeft:preLeft+1+size_left_subtree+1 preRight:preRight inorderLeft:inorder_root+1 inorderRight:inorderRight map:dic];
+    root.rightNode = [self buildTree:preorder inorder:inordere preLeft:preLeft+size_left_subtree+1 preRight:preRight inorderLeft:inorder_root+1 inorderRight:inorderRight map:dic];
     return root;
 }
 
