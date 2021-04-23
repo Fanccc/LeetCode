@@ -43,6 +43,61 @@
     NSLog(@"%@",reslut);
 }
 
+#pragma mark - 两数相加
+- (void)twoNumerAdd:(FCLinkedModel *)link1 link2:(FCLinkedModel *)link2 {
+/**
+ [2,4,3]
+ [5,6,4]
+ [7,0,8]
+ 解释：342 + 465 = 807.
+ */
+    FCLinkedModel *result_head;
+    FCLinkedModel *result_tail;
+    NSInteger carry = 0;
+    while (link1 || link2) {
+        NSInteger one = 0;
+        NSInteger two = 0;
+        if (link1) {
+            one = link1.value;
+        }
+        if (link2) {
+            two = link2.value;
+        }
+        NSInteger number = one + two + carry;
+        NSInteger value = 0;
+        if (number >= 10) {
+            value = number%10;
+            carry = number/10;
+        } else {
+            value = number;
+            carry = 0;
+        }
+
+        if (!result_head) {
+            FCLinkedModel *model = [[FCLinkedModel alloc] init];
+            result_head = model;
+            result_tail = result_head;
+            model.value = value;
+        } else {
+            result_tail.nextValue = [[FCLinkedModel alloc] init];
+            result_tail.nextValue.value = value;
+            result_tail = result_tail.nextValue;
+        }
+
+        if (link1) {
+            link1 = link1.nextValue;
+        }
+        if (link2) {
+            link2 = link2.nextValue;
+        }
+    }
+    if (carry > 0) {
+        result_tail.nextValue = [[FCLinkedModel alloc] init];
+        result_tail.nextValue.value = carry;
+    }
+    [self printLinkList:result_head];
+}
+
 #pragma mark - 反转链表
 - (void)revertLinkList {
     FCLinkedModel *list = [self linkedList];
@@ -585,6 +640,28 @@
         [self buildBinaryFromList:@[@3,@9,@20,@15,@7] middle:@[@9,@3,@15,@20,@7]];
     } else if ([title isEqualToString:@"两数之和"]) {
         [self twoNumber:9 array:@[@1,@2,@3,@7,@11,@15]];
+    } else if ([title isEqualToString:@"两数相加"]) {
+        //2,6,3
+        //5,6,4
+        FCLinkedModel *link1_1 = [[FCLinkedModel alloc] init];
+        link1_1.value = 2;
+        FCLinkedModel *link1_2 = [[FCLinkedModel alloc] init];
+        link1_2.value = 4;
+        link1_1.nextValue = link1_2;
+        FCLinkedModel *link1_3 = [[FCLinkedModel alloc] init];
+        link1_3.value = 3;
+        link1_2.nextValue = link1_3;
+
+        FCLinkedModel *link2_1 = [[FCLinkedModel alloc] init];
+        link2_1.value = 5;
+        FCLinkedModel *link2_2 = [[FCLinkedModel alloc] init];
+        link2_2.value = 6;
+        link2_1.nextValue = link2_2;
+        FCLinkedModel *link2_3 = [[FCLinkedModel alloc] init];
+        link2_3.value = 4;
+        link2_2.nextValue = link2_3;
+
+        [self twoNumerAdd:link1_1 link2:link2_1];
     } else {
         NSLog(@"点击事件未实现");
     }
@@ -596,6 +673,7 @@
     if (!_tableListArray) {
         _tableListArray = @[
             @"两数之和",
+            @"两数相加",
             @"反转链表",
             @"两个数组合并有序数组",
             @"判断两个链表是否有交集",
