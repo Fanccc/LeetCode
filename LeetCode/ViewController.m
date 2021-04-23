@@ -22,6 +22,27 @@
     // Do any additional setup after loading the view.
 }
 
+#pragma mark - 两数之和
+//时间复杂度：O(N)
+- (void)twoNumber:(NSInteger)target array:(NSArray *)array {
+    //采用hashtable的特效,key的唯一性
+    NSMutableArray *reslut = [NSMutableArray array];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    for (NSInteger i = 0; i < array.count; i++) {
+        NSInteger count = [self countFromArray:array index:i];
+        if ([dic.allKeys containsObject:@(count)]) {
+            [reslut addObject:[dic objectForKey:@(count)]];
+            [reslut addObject:@(count)];
+            break;
+        } else {
+            //需要匹配的数字
+            NSInteger offset = target - count;
+            [dic setObject:@(count) forKey:@(offset)];
+        }
+    }
+    NSLog(@"%@",reslut);
+}
+
 #pragma mark - 反转链表
 - (void)revertLinkList {
     FCLinkedModel *list = [self linkedList];
@@ -562,6 +583,8 @@
         [self binaryIsSymmetryBianryTree:[self symmetryBinaryTreeModel]];
     } else if ([title isEqualToString:@"从前序与中序遍历序列构造二叉树"]) {
         [self buildBinaryFromList:@[@3,@9,@20,@15,@7] middle:@[@9,@3,@15,@20,@7]];
+    } else if ([title isEqualToString:@"两数之和"]) {
+        [self twoNumber:9 array:@[@1,@2,@3,@7,@11,@15]];
     } else {
         NSLog(@"点击事件未实现");
     }
@@ -572,6 +595,7 @@
 
     if (!_tableListArray) {
         _tableListArray = @[
+            @"两数之和",
             @"反转链表",
             @"两个数组合并有序数组",
             @"判断两个链表是否有交集",
