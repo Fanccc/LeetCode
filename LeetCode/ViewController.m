@@ -270,13 +270,25 @@
 
 #pragma mark - 判断一个二叉树是不是搜索二叉树
 /**
+ BST树
  假设一个二叉搜索树具有如下特征：
  节点的左子树只包含小于当前节点的数。
  节点的右子树只包含大于当前节点的数。
  所有左子树和右子树自身必须也是二叉搜索树。
  */
 - (void)binaryIsSearchBianryTree:(FCBinaryTreeModel *)node {
-    [self printBinaryTreeNodeValue:node];
+    BOOL isSearchBinary = [self isSearchBinary:node minValue:INT64_MIN maxValue:INT64_MAX];
+    NSLog(@"是不是搜索二叉树 %@",@(isSearchBinary));
+}
+
+- (BOOL)isSearchBinary:(FCBinaryTreeModel *)node minValue:(NSInteger)minValue maxValue:(NSInteger)maxValue {
+    if (!node) {
+        return YES;
+    }
+    if (node.value <= minValue || node.value >= maxValue) {
+        return NO;
+    }
+    return [self isSearchBinary:node.leftNode minValue:minValue maxValue:node.value] && [self isSearchBinary:node.rightNode minValue:node.value maxValue:maxValue];
 }
 
 #pragma mark - 从前序与中序遍历序列构造二叉树
@@ -560,9 +572,9 @@
 
 //搜索二叉树
 - (FCBinaryTreeModel *)searchBinaryTree {
-    FCBinaryTreeModel *node = [self rootBinaryTreeNode:4 leftValue:3 rightValue:5];
-    [self subBinaryTreeNode:node.rightNode leftValue:4 rightValue:7];
-    [self subBinaryTreeNode:node.rightNode.leftNode leftValue:1 rightValue:5];
+    FCBinaryTreeModel *node = [self rootBinaryTreeNode:4 leftValue:2 rightValue:5];
+    [self subBinaryTreeNode:node.leftNode leftValue:1 rightValue:3];
+    [self subBinaryTreeNode:node.rightNode leftValue:-1 rightValue:6];
     return node;
 }
 
@@ -591,8 +603,12 @@
     FCBinaryTreeModel *rightNode = [[FCBinaryTreeModel alloc] init];
     rightNode.value = rightValue;
     //根节点
-    rootNode.leftNode = leftNode;
-    rootNode.rightNode = rightNode;
+    if (leftNode.value > 0) {
+        rootNode.leftNode = leftNode;
+    }
+    if (rightNode.value > 0) {
+        rootNode.rightNode = rightNode;
+    }
 }
 
 #pragma mark - UITableView
