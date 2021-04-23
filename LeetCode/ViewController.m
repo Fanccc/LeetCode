@@ -269,8 +269,14 @@
 }
 
 #pragma mark - 判断一个二叉树是不是搜索二叉树
+/**
+ 假设一个二叉搜索树具有如下特征：
+ 节点的左子树只包含小于当前节点的数。
+ 节点的右子树只包含大于当前节点的数。
+ 所有左子树和右子树自身必须也是二叉搜索树。
+ */
 - (void)binaryIsSearchBianryTree:(FCBinaryTreeModel *)node {
-
+    [self printBinaryTreeNodeValue:node];
 }
 
 #pragma mark - 从前序与中序遍历序列构造二叉树
@@ -552,6 +558,14 @@
     return root;
 }
 
+//搜索二叉树
+- (FCBinaryTreeModel *)searchBinaryTree {
+    FCBinaryTreeModel *node = [self rootBinaryTreeNode:4 leftValue:3 rightValue:5];
+    [self subBinaryTreeNode:node.rightNode leftValue:4 rightValue:7];
+    [self subBinaryTreeNode:node.rightNode.leftNode leftValue:1 rightValue:5];
+    return node;
+}
+
 /// 创建二叉树根节点
 - (FCBinaryTreeModel *)rootBinaryTreeNode:(NSInteger)rootValue leftValue:(NSInteger)leftValue rightValue:(NSInteger)rightValue {
     //左节点
@@ -562,7 +576,7 @@
     rightNode.value = rightValue;
     //根节点
     FCBinaryTreeModel *rootNode = [[FCBinaryTreeModel alloc] init];
-    rootNode.value = 1;
+    rootNode.value = rootValue;
     rootNode.leftNode = leftNode;
     rootNode.rightNode = rightNode;
     return rootNode;
@@ -633,7 +647,7 @@
         NSInteger line = [self binaryDepth:[self binaryTreeModel]];
         NSLog(@"二叉树的深度 %@",@(line));
     } else if ([title isEqualToString:@"判断一个二叉树是不是搜索二叉树"]) {
-        [self binaryIsSearchBianryTree:[self binaryTreeModel]];
+        [self binaryIsSearchBianryTree:[self searchBinaryTree]];
     } else if ([title isEqualToString:@"判断一个二叉树是不是对称二叉树"]) {
         [self binaryIsSymmetryBianryTree:[self symmetryBinaryTreeModel]];
     } else if ([title isEqualToString:@"从前序与中序遍历序列构造二叉树"]) {
