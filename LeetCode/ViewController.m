@@ -981,7 +981,7 @@
         tempB.nextValue = node_general;
         [self getIntersectionNode:nodeA headB:nodeB];
     } else if ([title isEqualToString:@"最长回文子串"]) {
-        [self longestPalindrome:@"babadcd"];
+        [self longestPalindrome:@"babab"];
     } else if ([title isEqualToString:@"找两个正序数组的中位数"]) {
 
     } else {
