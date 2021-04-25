@@ -118,6 +118,14 @@
 }
 
 #pragma mark - 两个数组合并有序数组
+/// 两个数组合并有序数组
+/// @param nums1 第一个数组,长度为m+n
+/// @param m 第一个数组的有效个数
+/// @param nums2 第二个数组
+/// @param n 第二个数组的长度
+- (void)mergeTwoArray:(NSArray *)nums1 m:(NSInteger)m nums2:(NSArray *)nums2 n:(NSInteger)n {
+
+}
 
 #pragma mark - 判断两个链表是否有交集
 
@@ -813,6 +821,8 @@
     } else if ([title isEqualToString:@"斐波拉契数列"]) {
         NSInteger result = [self fibonacci:10];
         NSLog(@"%@",@(result));
+    } else if ([title isEqualToString:@"两个数组合并有序数组"]) {
+        [self mergeTwoArray:@[@1,@2,@3,@0,@0,@0] m:3 nums2:@[@2,@5,@6] n:3];
     } else {
         NSLog(@"点击事件未实现");
     }
