@@ -139,7 +139,28 @@
  两个链表的第一个公共节点
  */
 - (FCLinkedModel *)getIntersectionNode:(FCLinkedModel *)headA headB:(FCLinkedModel *)headB {
-    return nil;
+    /**
+     @[@4,@1,@8,@4,@5]
+     @[@5,@0,@1,@8,@4,@5]
+     */
+    //双指针
+    FCLinkedModel *node1 = headA;
+    FCLinkedModel *node2 = headB;
+    while (node1 != node2) {
+        if (node1) {
+            node1 = node1.nextValue;
+        } else {
+            node1 = headB;
+        }
+
+        if (node2) {
+            node2 = node2.nextValue;
+        } else {
+            node2 = headA;
+        }
+    }
+    NSLog(@"%@",@(node1.value));
+    return node1;
 }
 
 #pragma mark - z字形打印二叉树
@@ -855,7 +876,20 @@
     } else if ([title isEqualToString:@"两个数组合并有序数组"]) {
         [self mergeTwoArray:[@[@1,@2,@3,@0,@0,@0] mutableCopy] m:3 nums2:[@[@2,@5,@6] mutableCopy] n:3];
     } else if ([title isEqualToString:@"判断两个链表是否有交集"]) {
-        [self getIntersectionNode:[self linkedFromArray:@[@4,@1,@8,@4,@5]] headB:[self linkedFromArray:@[@5,@0,@1,@8,@4,@5]]];
+        FCLinkedModel *node_general = [self linkedFromArray:@[@8,@4,@5]];
+        FCLinkedModel *nodeA = [self linkedFromArray:@[@4,@1]];
+        FCLinkedModel *tempA = nodeA;
+        while (tempA.nextValue) {
+            tempA = tempA.nextValue;
+        }
+        tempA.nextValue = node_general;
+        FCLinkedModel *nodeB = [self linkedFromArray:@[@5,@0,@1]];
+        FCLinkedModel *tempB = nodeB;
+        while (tempB.nextValue) {
+            tempB = tempB.nextValue;
+        }
+        tempB.nextValue = node_general;
+        [self getIntersectionNode:nodeA headB:nodeB];
     } else {
         NSLog(@"点击事件未实现");
     }
