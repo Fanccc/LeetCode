@@ -456,7 +456,18 @@
 }
 
 #pragma mark - 斐波拉契数列
-
+/**
+ 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55
+ 从第n项开始,第n项的值为f(n)=f(n-1) + f(n-2)
+ */
+- (NSInteger)fibonacci:(NSInteger)index {
+    //递归法
+    if (index < 2) {
+        return index;
+    } else {
+        return [self fibonacci:index-1] + [self fibonacci:index-2];
+    }
+}
 
 #pragma mark - 回文数
 /// 时间复杂度：O(logn)
@@ -762,6 +773,9 @@
         [self twoNumerAdd:link1_1 link2:link2_1];
     } else if ([title isEqualToString:@"无重复字符的最长子串"]) {
         [self lengthOfLongestSubstring:@"abcabcbb"];
+    } else if ([title isEqualToString:@"斐波拉契数列"]) {
+        NSInteger result = [self fibonacci:10];
+        NSLog(@"%@",@(result));
     } else {
         NSLog(@"点击事件未实现");
     }
@@ -789,6 +803,7 @@
             @"从前序与中序遍历序列构造二叉树",
             @"二叉树的深度",
             @"无重复字符的最长子串",
+            @"斐波拉契数列",
             @"回文数",
             @"二分查找",
             @"快速排序",
