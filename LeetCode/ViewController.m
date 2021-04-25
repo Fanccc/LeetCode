@@ -759,6 +759,11 @@
 
 #pragma mark - 寻找两个正序数组的中位数
 
+#pragma mark - 合并两个有序链表
+- (FCLinkedModel *)mergeTwoLists:(FCLinkedModel *)l1 l2:(FCLinkedModel *)l2 {
+    return nil;
+}
+
 #pragma mark - 数组相关
 - (NSInteger)countFromArray:(NSArray *)array index:(NSInteger)index {
     NSNumber *number = array[index];
@@ -984,6 +989,8 @@
         [self longestPalindrome:@"babab"];
     } else if ([title isEqualToString:@"找两个正序数组的中位数"]) {
 
+    } else if ([title isEqualToString:@"合并两个有序链表"]) {
+        [self mergeTwoLists:[self linkedFromArray:@[@1,@2,@4]] l2:@[@1,@3,@4]];
     } else {
         NSLog(@"点击事件未实现");
     }
@@ -994,6 +1001,7 @@
 
     if (!_tableListArray) {
         _tableListArray = @[
+            @"合并两个有序链表",
             @"验证是不是回文字符串",
             @"最长回文子串",
             @"寻找两个正序数组的中位数",
