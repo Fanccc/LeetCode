@@ -135,6 +135,12 @@
 }
 
 #pragma mark - 判断两个链表是否有交集
+/**
+ 两个链表的第一个公共节点
+ */
+- (FCLinkedModel *)getIntersectionNode:(FCLinkedModel *)headA headB:(FCLinkedModel *)headB {
+    return nil;
+}
 
 #pragma mark - z字形打印二叉树
 - (void)printBinaryTreeLikeZ {
@@ -681,6 +687,24 @@
     NSLog(@"链表输出值 %@",printStr);
 }
 
+- (FCLinkedModel *)linkedFromArray:(NSArray *)array {
+    FCLinkedModel *head = nil;
+    FCLinkedModel *next = nil;
+    for (NSInteger i = 0; i < array.count; i++) {
+        if (!head) {
+            head = [[FCLinkedModel alloc] init];
+            next = head;
+        }
+        next.value = [self countFromArray:array index:i];
+        if (i != array.count - 1) {
+            FCLinkedModel *nextValue = [[FCLinkedModel alloc] init];
+            next.nextValue = nextValue;
+            next = nextValue;
+        }
+    }
+    return head;
+}
+
 #pragma mark - 二叉树数据源
 - (FCBinaryTreeModel *)binaryTreeModel {
     FCBinaryTreeModel *root = [self rootBinaryTreeNode:1 leftValue:2 rightValue:3];
@@ -830,6 +854,8 @@
         NSLog(@"%@",@(result));
     } else if ([title isEqualToString:@"两个数组合并有序数组"]) {
         [self mergeTwoArray:[@[@1,@2,@3,@0,@0,@0] mutableCopy] m:3 nums2:[@[@2,@5,@6] mutableCopy] n:3];
+    } else if ([title isEqualToString:@"判断两个链表是否有交集"]) {
+        [self getIntersectionNode:[self linkedFromArray:@[@4,@1,@8,@4,@5]] headB:[self linkedFromArray:@[@5,@0,@1,@8,@4,@5]]];
     } else {
         NSLog(@"点击事件未实现");
     }
