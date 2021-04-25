@@ -535,7 +535,7 @@
 //        return [self fibonacci:index-1] + [self fibonacci:index-2];
 //    }
 
-    //动态规划
+    //迭代
     NSInteger a = 0;
     NSInteger b = 1;
     NSInteger sum = 0;
@@ -668,6 +668,96 @@
     }
     NSLog(@"选择排序 %@",list);
 }
+
+#pragma mark - 最长回文子串
+- (NSString *)longestPalindrome:(NSString *)s {
+    //babad
+    /**
+     1.暴力解法,双重for循环
+     */
+
+    //2.动态规划
+    //1.边界情况
+    NSInteger lenght = s.length;
+    if (lenght < 2) {
+        return s;
+    }
+
+    NSInteger maxLen = 1;
+    NSInteger begin = 0;
+
+    //dp[i][j] 表示 s[i..j] 是否是回文串
+    NSMutableArray *dp = [NSMutableArray array];
+    for (NSInteger i = 0; i < lenght; i++) {
+        NSMutableArray *row_array = [NSMutableArray array];
+        for (NSInteger j = 0; j < lenght; j++) {
+            [row_array addObject:@(NO)];
+        }
+        [dp addObject:row_array];
+    }
+
+    //初始化：所有长度为 1 的子串都是回文串
+    for (NSInteger i = 0; i < lenght; i++) {
+        dp[i][i] = @(YES);
+    }
+
+    //拆分字符数组
+    NSMutableArray *charArray = [NSMutableArray array];
+    for (NSInteger i = 0; i < lenght; i++) {
+        [charArray addObject:[s substringWithRange:NSMakeRange(i, 1)]];
+    }
+
+    // 递推开始
+    // 先枚举子串长度
+    for (NSInteger L = 2; L <= lenght; L++) {
+        // 枚举左边界，左边界的上限设置可以宽松一些
+        for (NSInteger i = 0; i < lenght; i++) {
+            // 由 L 和 i 可以确定右边界，即 j - i + 1 = L 得
+            NSInteger j = L + i - 1;
+            // 如果右边界越界，就可以退出当前循环
+            if (j >= lenght) {
+                break;
+            }
+
+            if (charArray[i] != charArray[j]) {
+                dp[i][j] = @(NO);
+            } else {
+                if (j - i < 3) {
+                    dp[i][j] = @(YES);
+                } else {
+                    dp[i][j] = dp[i + 1][j - 1];
+                }
+            }
+
+            // 只要 dp[i][L] == true 成立，就表示子串 s[i..L] 是回文，此时记录回文长度和起始位置
+            if ([dp[i][j] boolValue] == YES && j - i + 1 > maxLen) {
+                maxLen = j - i + 1;
+                begin = i;
+            }
+        }
+    }
+
+    NSString *subString = [s substringWithRange:NSMakeRange(begin, begin + maxLen)];
+    NSLog(@"%@",subString);
+    return subString;
+}
+
+#pragma mark - 验证是不是回文字符串
+- (BOOL)isPalindromeString:(NSString *)s left:(NSInteger)left right:(NSInteger)right {
+    while (left < right) {
+        NSString *left_subString = [s substringWithRange:NSMakeRange(left, 1)];
+        NSString *right_subString = [s substringWithRange:NSMakeRange(right-1,1)];
+        if (left_subString != right_subString) {
+            return NO;
+        }
+        left++;
+        right--;
+    }
+
+    return YES;
+}
+
+#pragma mark - 寻找两个正序数组的中位数
 
 #pragma mark - 数组相关
 - (NSInteger)countFromArray:(NSArray *)array index:(NSInteger)index {
@@ -890,6 +980,10 @@
         }
         tempB.nextValue = node_general;
         [self getIntersectionNode:nodeA headB:nodeB];
+    } else if ([title isEqualToString:@"最长回文子串"]) {
+        [self longestPalindrome:@"babadcd"];
+    } else if ([title isEqualToString:@"找两个正序数组的中位数"]) {
+
     } else {
         NSLog(@"点击事件未实现");
     }
@@ -900,6 +994,9 @@
 
     if (!_tableListArray) {
         _tableListArray = @[
+            @"验证是不是回文字符串",
+            @"最长回文子串",
+            @"寻找两个正序数组的中位数",
             @"两数之和",
             @"两数相加",
             @"反转链表",
