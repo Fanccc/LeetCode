@@ -457,16 +457,28 @@
 
 #pragma mark - 斐波拉契数列
 /**
- 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55
+ 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89
  从第n项开始,第n项的值为f(n)=f(n-1) + f(n-2)
  */
 - (NSInteger)fibonacci:(NSInteger)index {
     //递归法
-    if (index < 2) {
-        return index;
-    } else {
-        return [self fibonacci:index-1] + [self fibonacci:index-2];
+//    if (index < 2) {
+//        return index;
+//    } else {
+//        return [self fibonacci:index-1] + [self fibonacci:index-2];
+//    }
+
+    //动态规划
+    NSInteger a = 0;
+    NSInteger b = 1;
+    NSInteger sum = 0;
+    for (NSInteger i = 0; i < index; i++) {
+        sum = a + b;
+        a = b;
+        b = sum;
     }
+    //细节,注意return值
+    return a;
 }
 
 #pragma mark - 回文数
