@@ -450,9 +450,34 @@
     }
 }
 
-#pragma mark - 无重复字符的最长子串
-- (void)lengthOfLongestSubstring:(NSString *)string {
+#pragma mark - 红黑树
 
+
+#pragma mark - 无重复字符的最长子串
+/**
+ 滑动窗口
+ abcabcbb
+*/
+- (void)lengthOfLongestSubstring:(NSString *)string {
+    //记录每个字符是否出现过
+    NSMutableSet *set = [NSMutableSet set];
+    NSInteger rk = -1;
+    NSInteger ans = 0;
+    NSInteger n = string.length;
+
+    for (NSInteger i = 0; i < n; i++) {
+        if (i != 0) {
+            // 左指针向右移动一格，移除一个字符
+            NSString *subString = [string substringWithRange:NSMakeRange(i - 1, 1)];
+            [set removeObject:subString];
+        }
+        while (rk + 1 < n && ![set containsObject:[string substringWithRange:NSMakeRange(rk+1, 1)]]) {
+            [set addObject:[string substringWithRange:NSMakeRange(rk+1, 1)]];
+            rk++;
+        }
+        ans = MAX(ans, rk-i+1);
+    }
+    NSLog(@"%@",@(ans));
 }
 
 #pragma mark - 斐波拉契数列
