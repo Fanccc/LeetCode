@@ -761,7 +761,19 @@
 
 #pragma mark - 合并两个有序链表
 - (FCLinkedModel *)mergeTwoLists:(FCLinkedModel *)l1 l2:(FCLinkedModel *)l2 {
-    return nil;
+    if (!l1) {
+        return nil;
+    }
+    if (!l2) {
+        return nil;
+    }
+    if (l1.value < l2.value) {
+        l1.nextValue = [self mergeTwoLists:l1.nextValue l2:l2];
+        return l1;
+    } else {
+        l2.nextValue = [self mergeTwoLists:l1 l2:l2.nextValue];
+        return l2;
+    }
 }
 
 #pragma mark - 数组相关
@@ -990,7 +1002,8 @@
     } else if ([title isEqualToString:@"找两个正序数组的中位数"]) {
 
     } else if ([title isEqualToString:@"合并两个有序链表"]) {
-        [self mergeTwoLists:[self linkedFromArray:@[@1,@2,@4]] l2:@[@1,@3,@4]];
+        FCLinkedModel *merge_Link = [self mergeTwoLists:[self linkedFromArray:@[@1,@2,@4]] l2:[self linkedFromArray:@[@1,@3,@4]]];
+        [self printLinkList:merge_Link];
     } else {
         NSLog(@"点击事件未实现");
     }
