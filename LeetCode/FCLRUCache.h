@@ -9,4 +9,10 @@
 
 @interface FCLRUCache : NSObject
 
+- (instancetype)initWithCapacity:(NSInteger)capacity;
+
+- (NSInteger)get:(NSInteger)key;
+
+- (void)put:(NSInteger)key value:(NSInteger)value;
+
 @end
