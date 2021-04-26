@@ -8,6 +8,7 @@
 #import "ViewController.h"
 #import "FCLinkedModel.h"
 #import "FCBinaryTreeModel.h"
+#import "FCLRUCache.h"
 
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -777,7 +778,18 @@
 }
 
 #pragma mark - LRU
-
+- (void)LRU {
+    FCLRUCache *cache = [[FCLRUCache alloc] initWithCapacity:2];
+    [cache put:1 value:1];
+    [cache put:2 value:2];
+    NSLog(@"%@",@([cache get:1]));
+    [cache put:3 value:3];
+    NSLog(@"%@",@([cache get:2]));
+    [cache put:4 value:4];
+    NSLog(@"%@",@([cache get:1]));
+    NSLog(@"%@",@([cache get:3]));
+    NSLog(@"%@",@([cache get:4]));
+}
 
 #pragma mark - 数组相关
 - (NSInteger)countFromArray:(NSArray *)array index:(NSInteger)index {
@@ -1007,6 +1019,8 @@
     } else if ([title isEqualToString:@"合并两个有序链表"]) {
         FCLinkedModel *merge_Link = [self mergeTwoLists:[self linkedFromArray:@[@1,@2,@4]] l2:[self linkedFromArray:@[@1,@3,@4]]];
         [self printLinkList:merge_Link];
+    } else if ([title isEqualToString:@"LRU"]) {
+        [self LRU];
     } else {
         NSLog(@"点击事件未实现");
     }
@@ -1017,6 +1031,7 @@
 
     if (!_tableListArray) {
         _tableListArray = @[
+            @"LRU",
             @"合并两个有序链表",
             @"验证是不是回文字符串",
             @"最长回文子串",
