@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0071411B262FDA3D00B713AC /* FCBinaryTreeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0071411A262FDA3D00B713AC /* FCBinaryTreeModel.m */; };
+		008E1344263667A100AD15FA /* FCLRUCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 008E1343263667A100AD15FA /* FCLRUCache.m */; };
 		00F84FB8262EB7F400CF735D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F84FB7262EB7F400CF735D /* AppDelegate.m */; };
 		00F84FBB262EB7F400CF735D /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F84FBA262EB7F400CF735D /* SceneDelegate.m */; };
 		00F84FBE262EB7F400CF735D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F84FBD262EB7F400CF735D /* ViewController.m */; };
@@ -40,6 +41,8 @@
 /* Begin PBXFileReference section */
 		00714119262FDA3D00B713AC /* FCBinaryTreeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FCBinaryTreeModel.h; sourceTree = "<group>"; };
 		0071411A262FDA3D00B713AC /* FCBinaryTreeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FCBinaryTreeModel.m; sourceTree = "<group>"; };
+		008E1342263667A100AD15FA /* FCLRUCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FCLRUCache.h; sourceTree = "<group>"; };
+		008E1343263667A100AD15FA /* FCLRUCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FCLRUCache.m; sourceTree = "<group>"; };
 		00F84FB3262EB7F400CF735D /* LeetCode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeetCode.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00F84FB6262EB7F400CF735D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		00F84FB7262EB7F400CF735D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -120,6 +123,8 @@
 				00F84FF2262EBBBD00CF735D /* FCLinkedModel.m */,
 				00714119262FDA3D00B713AC /* FCBinaryTreeModel.h */,
 				0071411A262FDA3D00B713AC /* FCBinaryTreeModel.m */,
+				008E1342263667A100AD15FA /* FCLRUCache.h */,
+				008E1343263667A100AD15FA /* FCLRUCache.m */,
 				00F84FBF262EB7F400CF735D /* Main.storyboard */,
 				00F84FC2262EB7F500CF735D /* Assets.xcassets */,
 				00F84FC4262EB7F500CF735D /* LaunchScreen.storyboard */,
@@ -276,6 +281,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				008E1344263667A100AD15FA /* FCLRUCache.m in Sources */,
 				00F84FBE262EB7F400CF735D /* ViewController.m in Sources */,
 				00F84FF3262EBBBD00CF735D /* FCLinkedModel.m in Sources */,
 				00F84FB8262EB7F400CF735D /* AppDelegate.m in Sources */,

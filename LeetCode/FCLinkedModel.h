@@ -10,7 +10,11 @@
 
 @interface FCLinkedModel : NSObject
 
+@property (nonatomic, assign) NSInteger key;
+
 @property (nonatomic, assign) NSInteger value;
+
+@property (nonatomic, strong) FCLinkedModel *prevValue;
 
 @property (nonatomic, strong) FCLinkedModel *nextValue;
 
