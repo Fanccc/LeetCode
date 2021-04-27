@@ -814,6 +814,20 @@
     return max;
 }
 
+
+#pragma mark - 二叉搜索树的范围和
+- (NSInteger)rangeNumBST:(FCBinaryTreeModel *)node low:(NSInteger)low high:(NSInteger)high {
+    if (!node) {
+        return 0;
+    }
+    if (node.value > high) {
+        return [self rangeNumBST:node.leftNode low:low high:high];
+    } else if (node.value < low) {
+        return [self rangeNumBST:node.rightNode low:low high:high];
+    }
+    return node.value + [self rangeNumBST:node.leftNode low:low high:high] + [self rangeNumBST:node.rightNode low:low high:high];
+}
+
 #pragma mark - 数组相关
 - (NSInteger)countFromArray:(NSArray *)array index:(NSInteger)index {
     NSNumber *number = array[index];
@@ -1046,7 +1060,13 @@
         [self LRU];
     } else if ([title isEqualToString:@"盛最多水的容器"]) {
         [self maxArea:@[@1, @8, @6, @2, @5, @4, @8, @3, @7]];
-    } else {
+    } else if ([title isEqualToString:@"二叉搜索树的范围和"]) {
+        FCBinaryTreeModel *root = [self rootBinaryTreeNode:10 leftValue:5 rightValue:15];
+        [self subBinaryTreeNode:root.leftNode leftValue:3 rightValue:7];
+        [self subBinaryTreeNode:root.rightNode leftValue:-1 rightValue:18];
+        NSInteger value = [self rangeNumBST:root low:7 high:15];
+        NSLog(@"%@",@(value));
+    }  else {
         NSLog(@"点击事件未实现");
     }
 }
@@ -1056,6 +1076,7 @@
 
     if (!_tableListArray) {
         _tableListArray = @[
+            @"二叉搜索树的范围和",
             @"盛最多水的容器",
             @"LRU",
             @"合并两个有序链表",
