@@ -791,6 +791,29 @@
     NSLog(@"%@",@([cache get:4]));
 }
 
+#pragma mark - 盛最多水的容器
+- (NSInteger)maxArea:(NSArray *)lineArr {
+    //采用双指针
+    NSInteger left = 0;
+    NSInteger right = lineArr.count - 1;
+    NSInteger max = 0;
+    while (left != right) {
+        NSInteger leftValue = [self countFromArray:lineArr index:left];
+        NSInteger rightValue = [self countFromArray:lineArr index:right];
+        NSInteger currentMax = MIN(leftValue, rightValue) * (right - left);
+        if (currentMax > max) {
+            max = currentMax;
+        }
+        if (leftValue < rightValue) {
+            left++;
+        } else {
+            right--;
+        }
+    }
+    NSLog(@"%@",@(max));
+    return max;
+}
+
 #pragma mark - 数组相关
 - (NSInteger)countFromArray:(NSArray *)array index:(NSInteger)index {
     NSNumber *number = array[index];
@@ -1021,6 +1044,8 @@
         [self printLinkList:merge_Link];
     } else if ([title isEqualToString:@"LRU"]) {
         [self LRU];
+    } else if ([title isEqualToString:@"盛最多水的容器"]) {
+        [self maxArea:@[@1, @8, @6, @2, @5, @4, @8, @3, @7]];
     } else {
         NSLog(@"点击事件未实现");
     }
@@ -1031,6 +1056,7 @@
 
     if (!_tableListArray) {
         _tableListArray = @[
+            @"盛最多水的容器",
             @"LRU",
             @"合并两个有序链表",
             @"验证是不是回文字符串",
