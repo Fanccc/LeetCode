@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0071411B262FDA3D00B713AC /* FCBinaryTreeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0071411A262FDA3D00B713AC /* FCBinaryTreeModel.m */; };
 		008E1344263667A100AD15FA /* FCLRUCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 008E1343263667A100AD15FA /* FCLRUCache.m */; };
+		008E134A2636936100AD15FA /* OCBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 008E13492636936100AD15FA /* OCBaseViewController.m */; };
 		00F84FB8262EB7F400CF735D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F84FB7262EB7F400CF735D /* AppDelegate.m */; };
 		00F84FBB262EB7F400CF735D /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F84FBA262EB7F400CF735D /* SceneDelegate.m */; };
 		00F84FBE262EB7F400CF735D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F84FBD262EB7F400CF735D /* ViewController.m */; };
@@ -43,6 +44,8 @@
 		0071411A262FDA3D00B713AC /* FCBinaryTreeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FCBinaryTreeModel.m; sourceTree = "<group>"; };
 		008E1342263667A100AD15FA /* FCLRUCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FCLRUCache.h; sourceTree = "<group>"; };
 		008E1343263667A100AD15FA /* FCLRUCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FCLRUCache.m; sourceTree = "<group>"; };
+		008E13482636936100AD15FA /* OCBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCBaseViewController.h; sourceTree = "<group>"; };
+		008E13492636936100AD15FA /* OCBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OCBaseViewController.m; sourceTree = "<group>"; };
 		00F84FB3262EB7F400CF735D /* LeetCode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeetCode.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00F84FB6262EB7F400CF735D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		00F84FB7262EB7F400CF735D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -119,6 +122,8 @@
 				00F84FBA262EB7F400CF735D /* SceneDelegate.m */,
 				00F84FBC262EB7F400CF735D /* ViewController.h */,
 				00F84FBD262EB7F400CF735D /* ViewController.m */,
+				008E13482636936100AD15FA /* OCBaseViewController.h */,
+				008E13492636936100AD15FA /* OCBaseViewController.m */,
 				00F84FF1262EBBBD00CF735D /* FCLinkedModel.h */,
 				00F84FF2262EBBBD00CF735D /* FCLinkedModel.m */,
 				00714119262FDA3D00B713AC /* FCBinaryTreeModel.h */,
@@ -286,6 +291,7 @@
 				00F84FF3262EBBBD00CF735D /* FCLinkedModel.m in Sources */,
 				00F84FB8262EB7F400CF735D /* AppDelegate.m in Sources */,
 				00F84FC9262EB7F500CF735D /* main.m in Sources */,
+				008E134A2636936100AD15FA /* OCBaseViewController.m in Sources */,
 				00F84FBB262EB7F400CF735D /* SceneDelegate.m in Sources */,
 				0071411B262FDA3D00B713AC /* FCBinaryTreeModel.m in Sources */,
 			);
