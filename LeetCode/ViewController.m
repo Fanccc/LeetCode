@@ -357,7 +357,7 @@
 }
 
 #pragma mark - 从前序与中序遍历序列构造二叉树
-- (void)buildBinaryFromList:(NSArray *)preorder middle:(NSArray *)inorder {
+- (FCBinaryTreeModel *)buildBinaryFromList:(NSArray *)preorder middle:(NSArray *)inorder {
     NSInteger n = preorder.count;
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     for (NSInteger i = 0; i < inorder.count; i++) {
@@ -371,6 +371,8 @@
     [self printBinaryTreeNodeValue:node];
     NSLog(@">>>>>");
     [self printBinaryTreeFromMiddleTraversal:node];
+
+    return node;
 }
 
 - (FCBinaryTreeModel *)buildTree:(NSArray *)preorder
@@ -894,6 +896,33 @@
     return p == right && [self vailedPostorderRecur:array left:left right:left_right - 1] && [self vailedPostorderRecur:array left:left_right right:right - 1];
 }
 
+#pragma mark - 二叉树中和为某一值的路径
+/**
+ https://leetcode-cn.com/problems/er-cha-shu-zhong-he-wei-mou-yi-zhi-de-lu-jing-lcof/solution/mian-shi-ti-34-er-cha-shu-zhong-he-wei-mou-yi-zh-5/
+ */
+- (NSArray <NSArray *>*)pathSum:(FCBinaryTreeModel *)root target:(NSInteger)target {
+    NSMutableArray *reslut = [NSMutableArray array];
+    NSMutableArray *path = [NSMutableArray array];
+    [self pathSumRecr:root target:target reslut:reslut path:path];
+    NSLog(@"%@",reslut);
+    return reslut;
+}
+
+- (void)pathSumRecr:(FCBinaryTreeModel *)root target:(NSInteger)target reslut:(NSMutableArray *)reslut path:(NSMutableArray *)path {
+    if (!root) {
+        return;
+    }
+    [path addObject:@(root.value)];
+    target -= root.value;
+    if (target == 0 && !root.leftNode && !root.rightNode) {
+        [reslut addObject:[NSArray arrayWithArray:path]];
+    }
+    [self pathSumRecr:root.leftNode target:target reslut:reslut path:path];
+    [self pathSumRecr:root.rightNode target:target reslut:reslut path:path];
+    [path removeLastObject];
+
+}
+
 #pragma mark - 数组相关
 - (NSInteger)countFromArray:(NSArray *)array index:(NSInteger)index {
     NSNumber *number = array[index];
@@ -1136,6 +1165,10 @@
         [self spiralOrderArray];
     } else if ([title isEqualToString:@"二叉搜索树的后序遍历结果"]) {
         [self vailedPostorder:@[@1,@3,@2,@7,@8,@6,@5]];
+    } else if ([title isEqualToString:@"二叉树中和为某一值的路径"]) {
+        FCBinaryTreeModel *root = [self buildBinaryFromList:@[@5,@4,@11,@7,@2,@8,@13,@3,@6,@1] middle:@[@7,@11,@2,@4,@5,@13,@8,@6,@3,@1]];
+        NSLog(@">>>>>>>");
+        [self pathSum:root target:22];
     } else {
         NSLog(@"点击事件未实现");
     }
@@ -1146,6 +1179,7 @@
 
     if (!_tableListArray) {
         _tableListArray = @[
+            @"二叉树中和为某一值的路径",
             @"二叉搜索树的后序遍历结果",
             @"顺时针打印矩形",
             @"二叉搜索树的范围和",
