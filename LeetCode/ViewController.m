@@ -828,6 +828,44 @@
     return node.value + [self rangeNumBST:node.leftNode low:low high:high] + [self rangeNumBST:node.rightNode low:low high:high];
 }
 
+#pragma mark - 顺时针打印矩形
+- (void)spiralOrderArray {
+    NSArray <NSArray *>*array = @[
+        @[@1,@2,@3,@4],
+        @[@5,@6,@7,@8],
+        @[@9,@10,@11,@12],
+    ];
+
+    NSMutableArray *orderArray = [NSMutableArray array];
+    NSInteger top = 0;
+    NSInteger left = 0;
+    NSInteger bottom = array.count - 1;
+    NSInteger right = array[0].count - 1;
+
+    while (left <= right && top <= bottom) {
+        for (NSInteger colum = left; colum <= right; colum++) {
+            [orderArray addObject:array[top][colum]];
+        }
+        for (NSInteger row = top + 1; row <= bottom; row++) {
+            [orderArray addObject:array[row][right]];
+        }
+        if (left < right && top < bottom) {
+            for (NSInteger colum = right - 1; colum >= left; colum--) {
+                [orderArray addObject:array[bottom][colum]];
+            }
+            for (NSInteger row = bottom - 1; row > top; row--) {
+                [orderArray addObject:array[row][left]];
+            }
+        }
+        left++;
+        right--;
+        top++;
+        bottom--;
+    }
+
+    NSLog(@"%@",orderArray);
+}
+
 #pragma mark - 数组相关
 - (NSInteger)countFromArray:(NSArray *)array index:(NSInteger)index {
     NSNumber *number = array[index];
@@ -1066,6 +1104,8 @@
         [self subBinaryTreeNode:root.rightNode leftValue:-1 rightValue:18];
         NSInteger value = [self rangeNumBST:root low:7 high:15];
         NSLog(@"%@",@(value));
+    } else if ([title isEqualToString:@"顺时针打印矩形"]) {
+        [self spiralOrderArray];
     }  else {
         NSLog(@"点击事件未实现");
     }
@@ -1076,6 +1116,7 @@
 
     if (!_tableListArray) {
         _tableListArray = @[
+            @"顺时针打印矩形",
             @"二叉搜索树的范围和",
             @"盛最多水的容器",
             @"LRU",
