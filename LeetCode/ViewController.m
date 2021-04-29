@@ -877,6 +877,11 @@
 
     NSInteger left_value = [array[p] integerValue];
     NSInteger right_value = [array[right] integerValue];
+    /**
+     todo:
+     直接写成 while(array[p] < array[right])的情况下
+     没有进入条件语句,有问题,需要一个临时变量来接一下
+     */
     while (left_value < right_value) {
         p++;
         left_value = [array[p] integerValue];
