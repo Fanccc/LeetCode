@@ -863,6 +863,32 @@
     NSLog(@"%@",orderArray);
 }
 
+#pragma mark - 二叉搜索树的后序遍历结果
+- (void)vailedPostorder:(NSArray *)array {
+    BOOL is = [self vailedPostorderRecur:array left:0 right:array.count - 1];
+    NSLog(@"%@",@(is));
+}
+
+- (BOOL)vailedPostorderRecur:(NSArray <NSNumber *>*)array left:(NSInteger)left right:(NSInteger)right {
+    if (left >= right) {
+        return YES;
+    }
+    NSInteger p = left;
+
+    NSInteger left_value = [array[p] integerValue];
+    NSInteger right_value = [array[right] integerValue];
+    while (left_value < right_value) {
+        p++;
+        left_value = [array[p] integerValue];
+    }
+    NSInteger left_right = p;
+    while (left_value > right_value) {
+        p++;
+        left_value = [array[p] integerValue];
+    }
+    return p == right && [self vailedPostorderRecur:array left:left right:left_right - 1] && [self vailedPostorderRecur:array left:left_right right:right - 1];
+}
+
 #pragma mark - 数组相关
 - (NSInteger)countFromArray:(NSArray *)array index:(NSInteger)index {
     NSNumber *number = array[index];
@@ -1103,7 +1129,9 @@
         NSLog(@"%@",@(value));
     } else if ([title isEqualToString:@"顺时针打印矩形"]) {
         [self spiralOrderArray];
-    }  else {
+    } else if ([title isEqualToString:@"二叉搜索树的后序遍历结果"]) {
+        [self vailedPostorder:@[@1,@3,@2,@7,@8,@6,@5]];
+    } else {
         NSLog(@"点击事件未实现");
     }
 }
@@ -1113,6 +1141,7 @@
 
     if (!_tableListArray) {
         _tableListArray = @[
+            @"二叉搜索树的后序遍历结果",
             @"顺时针打印矩形",
             @"二叉搜索树的范围和",
             @"盛最多水的容器",
