@@ -264,19 +264,16 @@
 - (void)printBinaryTreeFromTopToBottom:(FCBinaryTreeModel *)tree {
     NSMutableArray *listArray = [NSMutableArray array];
     [listArray addObject:tree];
-    while (listArray.count > 0) {
-        NSMutableArray *tempArray = [NSMutableArray array];
-        for (FCBinaryTreeModel *node in listArray) {
-            NSLog(@"%@",@(node.value));
-            if (node.leftNode) {
-                [tempArray addObject:node.leftNode];
-            }
-            if (node.rightNode) {
-                [tempArray addObject:node.rightNode];
-            }
+    while (listArray.firstObject) {
+        FCBinaryTreeModel *node = listArray.firstObject;
+        NSLog(@"%@",@(node.value));
+        [listArray removeObjectAtIndex:0];
+        if (node.leftNode) {
+            [listArray addObject:node.leftNode];
         }
-        [listArray removeAllObjects];
-        [listArray addObjectsFromArray:tempArray];
+        if (node.rightNode) {
+            [listArray addObject:node.rightNode];
+        }
     }
 }
 
