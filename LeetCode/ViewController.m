@@ -923,6 +923,50 @@
 
 }
 
+#pragma mark - 把数组排成最小的数
+- (NSString *)minNumber:(NSMutableArray *)nums {
+    //[3,30,34,5,9]
+    NSMutableArray *strs = [NSMutableArray array];
+    for (NSNumber *num in nums) {
+        [strs addObject:[NSString stringWithFormat:@"%@",num]];
+    }
+    [self quickSortMinNumber:strs left:0 right:strs.count - 1];
+    NSString *result = @"";
+    for (NSString *subStr in strs) {
+        result = [result stringByAppendingString:subStr];
+    }
+    NSLog(@"%@",result);
+    return result;
+}
+
+- (void)quickSortMinNumber:(NSMutableArray <NSString *>*)nums left:(NSInteger)left right:(NSInteger)right {
+    if (left >= right) {
+        return;
+    }
+    NSInteger i = left;
+    NSInteger j = right;
+    NSString *temp = nums[i];
+    NSString *leftStr = [nums[left] stringByAppendingString:nums[j]];
+    NSString *rightStr = [nums[j] stringByAppendingString:nums[left]];
+    while (rightStr.integerValue > leftStr.integerValue && i < j) {
+        j--;
+        leftStr = [nums[left] stringByAppendingString:nums[j]];
+        rightStr = [nums[j] stringByAppendingString:nums[left]];
+    }
+
+    leftStr = [nums[i] stringByAppendingString:nums[left]];
+    rightStr = [nums[left] stringByAppendingString:nums[i]];
+    while (leftStr.integerValue > rightStr.integerValue && i < j) {
+        i++;
+        leftStr = [nums[i] stringByAppendingString:nums[left]];
+        rightStr = [nums[left] stringByAppendingString:nums[i]];
+    }
+    nums[i] = nums[j];
+    nums[j] = temp;
+    [self quickSortMinNumber:nums left:left right:i-1];
+    [self quickSortMinNumber:nums left:i+1 right:right];
+}
+
 #pragma mark - 数组相关
 - (NSInteger)countFromArray:(NSArray *)array index:(NSInteger)index {
     NSNumber *number = array[index];
@@ -1169,6 +1213,9 @@
         FCBinaryTreeModel *root = [self buildBinaryFromList:@[@5,@4,@11,@7,@2,@8,@13,@3,@6,@1] middle:@[@7,@11,@2,@4,@5,@13,@8,@6,@3,@1]];
         NSLog(@">>>>>>>");
         [self pathSum:root target:22];
+    } else if ([title isEqualToString:@"把数组排成最小的数"]) {
+        NSArray *nums = @[@3,@30,@34,@5,@9];
+        [self minNumber:[NSMutableArray arrayWithArray:nums]];
     } else {
         NSLog(@"点击事件未实现");
     }
@@ -1179,6 +1226,7 @@
 
     if (!_tableListArray) {
         _tableListArray = @[
+            @"把数组排成最小的数",
             @"二叉树中和为某一值的路径",
             @"二叉搜索树的后序遍历结果",
             @"顺时针打印矩形",
