@@ -967,6 +967,11 @@
     [self quickSortMinNumber:nums left:i+1 right:right];
 }
 
+#pragma mark - 圆圈中最后剩下的数字
+/**
+ https://leetcode-cn.com/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/solution/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-by-lee/
+ */
+
 #pragma mark - 数组相关
 - (NSInteger)countFromArray:(NSArray *)array index:(NSInteger)index {
     NSNumber *number = array[index];
