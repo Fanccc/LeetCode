@@ -26,16 +26,89 @@
 #pragma mark - 两数之和
 //时间复杂度：O(N)
 - (void)twoNumber:(NSInteger)target array:(NSArray *)array {
-
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    NSMutableArray *result = [NSMutableArray array];
+    for (NSNumber *num in array) {
+        NSInteger value = num.integerValue;
+        if ([dic.allKeys containsObject:num]) {
+            [result addObject:num];
+            [result addObject:dic[num]];
+            break;
+        } else {
+            NSInteger offset = target - value;
+            [dic setObject:num forKey:@(offset)];
+        }
+    }
+    NSLog(@"%@",result);
 }
 
 #pragma mark - 两数相加
 - (void)twoNumerAdd:(FCLinkedModel *)link1 link2:(FCLinkedModel *)link2 {
+    /**
+     [2,4,3]
+     [5,6,4]
+     [7,0,8]
+     */
+    FCLinkedModel *result;
+    FCLinkedModel *next;
+    NSInteger carry = 0;
+    while (link1 || link2) {
+        NSInteger a_value = 0;
+        NSInteger b_value = 0;
+        if (link1) {
+            a_value = link1.value;
+            link1 = link1.nextValue;
+        }
+        if (link2) {
+            b_value = link2.value;
+            link2 = link2.nextValue;
+        }
 
+        NSInteger value = a_value + b_value + carry;
+        NSInteger current_value = 0;
+        if (value >= 10) {
+            current_value = value%10;
+            carry = value/10;
+        } else {
+            current_value = value;
+            carry = 0;
+        }
+        if (next) {
+            next.nextValue = [[FCLinkedModel alloc] init];
+            next.nextValue.value = current_value;
+            next = next.nextValue;
+        } else {
+            result = [[FCLinkedModel alloc] init];
+            result.value = current_value;
+            next = result;
+        }
+    }
+
+    if (carry > 0) {
+        next.nextValue = [[FCLinkedModel alloc] init];
+        next.nextValue.value = carry;
+    }
+
+    [self printLinkList:result];
 }
 
 #pragma mark - 反转链表
 - (void)revertLinkList {
+    /**
+     1->2->3->4->5->nil
+     5->4->3->2->1->nil
+     */
+    FCLinkedModel *link = [self linkedList];
+    [self printLinkList:link];
+
+    FCLinkedModel *prev = nil;
+    while (link) {
+        FCLinkedModel *nextModel = link.nextValue;
+        link.nextValue = prev;
+        prev = link;
+        link = nextModel;
+    }
+    [self printLinkList:prev];
 
 }
 
@@ -46,7 +119,18 @@
 /// @param nums2 第二个数组
 /// @param n 第二个数组的长度
 - (void)mergeTwoArray:(NSMutableArray *)nums1 m:(NSInteger)m nums2:(NSMutableArray *)nums2 n:(NSInteger)n {
+    /**
+     @[@1,@2,@3,@0,@0,@0]
+     3
+     @[@2,@5,@6]
+     3
+     */
+    for (NSInteger i = m; i < nums1.count; i++) {
+        nums1[i] = nums2[i - m];
+    }
 
+    [self quickSort:nums1 left:0 right:nums1.count - 1];
+    NSLog(@"%@",nums1);
 }
 
 #pragma mark - 判断两个链表是否有交集
@@ -165,7 +249,47 @@
  2.将小于中间值的数都放到左边
  */
 - (void)quickSort:(NSMutableArray *)list left:(NSInteger)left right:(NSInteger)right {
+    /**
+     1,2,3,2,5,6
+     */
+    if (left >= right) {
+        return;
+    }
 
+    NSInteger i = left;
+    NSInteger j = right;
+    NSInteger key_value = [list[i] integerValue];
+    while (i < j) {
+        //1. 从最后向前查找到第一个小于keyValue的数值
+        while (i < j) {
+            NSInteger j_value = [self countFromArray:list index:j];
+            if (j_value >= key_value) {
+                j--;
+            } else {
+                break;
+            }
+        }
+        if (i == j) {
+            break;
+        }
+        list[i] = list[j];
+
+        while (i < j) {
+            NSInteger i_value = [self countFromArray:list index:i];
+            if (i_value <= key_value) {
+                i++;
+            } else {
+                break;
+            }
+        }
+        if (i == j) {
+            break;
+        }
+        list[j] = list[i];
+    }
+    list[i] = @(key_value);
+    [self quickSort:list left:left right:i-1];
+    [self quickSort:list left:i+1 right:right];
 }
 
 #pragma mark - 冒泡排序
