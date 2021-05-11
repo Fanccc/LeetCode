@@ -553,7 +553,8 @@
 - (void)isPalindromicCount:(NSInteger)count {
     BOOL is = NO;
     NSInteger printValue = count;
-    if (count <= 10) {
+    //100不是, 尾数为0时,只有0是回文数.
+    if (count < 0 || (count % 10 == 0 && count != 0)) {
         is = NO;
     } else {
         NSInteger revertedNum = 0;
