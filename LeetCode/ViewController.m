@@ -972,6 +972,51 @@
  https://leetcode-cn.com/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/solution/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-by-lee/
  */
 
+#pragma mark - 最长公共子串
+- (NSString *)longestCommonSubString:(NSString *)text1 text2:(NSString *)text2 {
+    NSMutableArray *text1Array = [NSMutableArray array];
+    NSMutableArray *text2Array = [NSMutableArray array];
+    for (NSInteger i = 0; i < text1.length; i++) {
+        [text1Array addObject:[text1 substringWithRange:NSMakeRange(i, 1)]];
+    }
+    for (NSInteger i = 0; i < text2.length; i++) {
+        [text2Array addObject:[text2 substringWithRange:NSMakeRange(i, 1)]];
+    }
+
+    NSMutableArray *dp = [NSMutableArray arrayWithCapacity:text1Array.count];
+    for (NSInteger i = 0; i < text1Array.count; i++) {
+        NSMutableArray *subArray = [NSMutableArray array];
+        for (NSInteger j = 0; j < text2Array.count; j++) {
+            [subArray addObject:@(0)];
+        }
+        [dp addObject:subArray];
+    }
+
+    NSInteger max = 0;
+    NSInteger index = 0;
+    for (NSInteger i = 0; i < text1Array.count; i++) {
+        for (NSInteger j = 0; j < text2Array.count; j++) {
+            if (text1Array[i] == text2Array[j]) {
+                dp[i+1][j+1] = @([dp[i][j] integerValue] + 1);
+                if (max < [dp[i+1][j+1] integerValue]) {
+                    max = [dp[i+1][j+1] integerValue];
+                    index = i + 1;
+                }
+            }
+        }
+    }
+
+    if (max == 0) {
+        return @"-1";
+    } else {
+        //1AB2345CD
+        //2,3,4,5
+        NSString *str = [text1 substringWithRange:NSMakeRange(index - max, max)];
+        NSLog(@"%@",str);
+        return str;
+    }
+}
+
 #pragma mark - 数组相关
 - (NSInteger)countFromArray:(NSArray *)array index:(NSInteger)index {
     NSNumber *number = array[index];
@@ -1221,6 +1266,8 @@
     } else if ([title isEqualToString:@"把数组排成最小的数"]) {
         NSArray *nums = @[@3,@30,@34,@5,@9];
         [self minNumber:[NSMutableArray arrayWithArray:nums]];
+    } else if ([title isEqualToString:@"最长公共子串"]) {
+        [self longestCommonSubString:@"1AB2345CD" text2:@"12345EF"];
     } else {
         NSLog(@"点击事件未实现");
     }
@@ -1231,6 +1278,7 @@
 
     if (!_tableListArray) {
         _tableListArray = @[
+            @"最长公共子串",
             @"把数组排成最小的数",
             @"二叉树中和为某一值的路径",
             @"二叉搜索树的后序遍历结果",
