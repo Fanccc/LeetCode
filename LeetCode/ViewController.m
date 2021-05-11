@@ -973,6 +973,10 @@
  */
 
 #pragma mark - 最长公共子串
+/**
+ 时间复杂度为O(mn)
+ 空间复杂度为O(mn)
+ */
 - (NSString *)longestCommonSubString:(NSString *)text1 text2:(NSString *)text2 {
     NSMutableArray *text1Array = [NSMutableArray array];
     NSMutableArray *text2Array = [NSMutableArray array];
